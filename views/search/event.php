@@ -29,7 +29,7 @@ $entities = [
         'icon' => 'dateWeek',
     ],
     'finished' => [
-        'description' => 'eventos finalizadas',
+        'description' => 'eventos finalizados',
         'number' => '15',
         'icon' => 'dateCheck',
     ],
@@ -59,17 +59,19 @@ $this->breadcrumb = [
         <div class="card-section">
             <?php foreach ($entities as $key => $entity): ?>
                 <div class="card-container">
-                    <div class="card-header">
-                        <p class="event-quantity">
-                            <?= i::__($entity['number']) ?>
-                        </p>
-                        <div class="event-icon">
-                            <mc-icon name=<?= i::__($entity['icon']) ?>></mc-icon>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <p class="event-quantity">
+                                <?= i::__($entity['number']) ?>
+                            </p>
+                            <div class="event-icon">
+                                <mc-icon name=<?= i::__($entity['icon']) ?>></mc-icon>
+                            </div>
                         </div>
+                        <p class="event-description">
+                            <?= i::__($entity['description']) ?>
+                        </p>
                     </div>
-                    <p class="event-description">
-                        <?= i::__($entity['description']) ?>
-                    </p>
                 </div>
             <?php endforeach; ?>
         </div>
