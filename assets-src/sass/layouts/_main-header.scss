@@ -1,11 +1,17 @@
 .main-header {
 
-    &__content {        
+    &__content {
 
         .logIn {
 
             background-color: $button;
 
+        }
+
+        ;
+
+        &__logo {
+            margin-left: 40px;
         }
 
     }

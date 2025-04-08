@@ -57,7 +57,9 @@ $this->import('
 
             <!-- Logo -->
             <template #logo>
-                <theme-logo href="<?= $app->createUrl('site', 'index') ?>"></theme-logo>
+                <div class="main-header__content__logo">
+                    <theme-logo href="<?= $app->createUrl('site', 'index') ?>"></theme-logo>
+                </div>
             </template>
             <!-- Menu principal -->
             <template #default>
