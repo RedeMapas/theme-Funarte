@@ -58,13 +58,13 @@ $this->import('
             <!-- Logo -->
             <template #logo>
                 <div class="main-header__content__logo">
-                    <theme-logo href="<?= $app->createUrl('site', 'index') ?>"></theme-logo>
+                <theme-logo href="<?= $app->createUrl('site', 'index') ?>"></theme-logo>
                 </div>
             </template>
             <!-- Menu principal -->
             <template #default>
                 <?php $this->applyTemplateHook('mc-header-menu', 'begin') ?>
-
+                
                 <?php $this->applyTemplateHook('mc-header-menu-home', 'before') ?>
                 <li>
                     <?php $this->applyTemplateHook('mc-header-menu-home', 'begin') ?>
@@ -130,9 +130,7 @@ $this->import('
                     <?php $this->applyTemplateHook('mc-header-menu-projects', 'end') ?>
                 </li>
                 <?php $this->applyTemplateHook('mc-header-menu-projects', 'after') ?>
-
-
-
+                
                 <?php $this->applyTemplateHook('mc-header-menu', 'end') ?>
             </template>
 
