@@ -15,6 +15,7 @@ return [
     ex: `img/meu-home-header-background.jpg` (pasta assets/img/meu-home-header-background.jpg do tema)
     */
     'homeHeader.background' => 'img/banner.png',
+    'logo.hideLabel' => env('LOGO_HIDELABEL', true),
 
     /*
     Define as configurações de ícones de redes sociais do componente main-footer.
