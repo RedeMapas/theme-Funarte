@@ -4,20 +4,19 @@ namespace Funarte;
 
 use MapasCulturais\App;
 
+
+// class Theme extends \Subsite\Theme {
 class Theme extends \MapasCulturais\Themes\BaseV2\Theme
 {
-
-    static function getThemeFolder() {
-
+    static function getThemeFolder()
+    {
         return __DIR__;
-
     }
 
-    function _init() {
-
+    function _init()
+    {
         parent::_init();
 
-        $this->enqueueStyle('app-v2', 'main', 'css/theme-Funarte.css');
-
+        $app = App::i();
     }
 }
