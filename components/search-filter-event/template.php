@@ -60,12 +60,7 @@ $this->import('
         
         <div class="field">
             <label> <?php i::_e('Nome do evento') ?></label>
-            <mc-currency-input :model="pseudoQuery['event:name']" title="<?php i::_e('Nome do evento')?>" :items="" placeholder="<?= i::esc_attr__('Digite') ?>" mode="text" hide-filter hide-button>
-                <template #default="{popover, setFilter}">
-                    <input class="mc-currency-input--input" @keyup="setFilter($event.target.value)" @focus="popover.open()" :triggers="['click']">
-                </template>
-            </mc-currency-input>
-            <mc-tag-list editable :tags="pseudoQuery['event:name']" classes="event__background event__color"></mc-tag-list>
+            <input @change="setFilter($event.target.value)" id="name" type="text" v-model="pseudoQuery['event:name']" placeholder="<?= i::esc_attr__('Digite') ?>"/>
         </div>
 
         <div class="field">
