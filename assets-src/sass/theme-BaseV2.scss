@@ -64,7 +64,7 @@ $home-register: #036293;
 // $shadow-lv-1-up: 0px -4px 8px rgba(0, 0, 0, 0.16);
 
 @import '../../../BaseV2/assets-src/sass/theme-BaseV2';
-
+@import './components/_search-filter.scss';
 @import './components/home-entities.scss';
 @import './layouts/_home-register.scss';
 
