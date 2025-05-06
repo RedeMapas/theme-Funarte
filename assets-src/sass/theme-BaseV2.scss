@@ -65,8 +65,10 @@ $home-register: #036293;
 
 @import '../../../BaseV2/assets-src/sass/theme-BaseV2';
 
-@import './components/home-entities.scss';
-@import './layouts/_home-register.scss';
+@import './components/home-entities';
+@import './components/events-stats-cards';
+@import './layouts/home-register';
+@import './pages/search';
 
 .mc-header-logo {
     max-width: 9rem;
