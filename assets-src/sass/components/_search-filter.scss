@@ -1,0 +1,18 @@
+.search-filter{
+    @media (max-width: size(800)) {
+        &--map & {
+            &__actions {
+                justify-content: center;
+                top: size(-100);
+                margin-left: 0;
+                position: absolute;
+
+                &-form{
+                    &-btn{
+                        bottom: size(-126);
+                    }
+                }
+            }
+        }
+    }
+}
