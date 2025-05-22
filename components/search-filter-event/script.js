@@ -110,8 +110,8 @@ app.component('search-filter-event', {
         this.pseudoQuery['event:term:linguagem'] = this.pseudoQuery['event:term:linguagem'] || [];
         this.pseudoQuery['event:classificacaoEtaria'] = this.pseudoQuery['event:classificacaoEtaria'] || [];
         this.pseudoQuery['event:selos'] = this.pseudoQuery['event:selos'] || [];
-        this.pseudoQuery['event:estado'] = this.pseudoQuery['event:estado'] || [];
-        this.pseudoQuery['event:municipio'] = this.pseudoQuery['event:municipio'] || [];
+        this.pseudoQuery['event:En_Estado'] = this.pseudoQuery['event:En_Estado'] || [];
+        this.pseudoQuery['event:En_Municipio'] = this.pseudoQuery['event:En_Municipio'] || [];
     },
     
     props: {
@@ -126,36 +126,18 @@ app.component('search-filter-event', {
     },
 
     watch: {
-        "pseudoQuery['event:estado']": {
+        "pseudoQuery['event:En_Estado']": {
             handler(value) {
-                // Mantém apenas municípios que ainda estão disponíveis nos estados selecionados
-                this.pseudoQuery['event:municipio'] = (this.pseudoQuery['event:municipio'] || []).filter(
-                    city => city in this.cities
-                );
-
-                this.$emit('update:modelStates', value);
+                this.selectedStates = value;
+                this.filterByState();
                 this.$emit('changeStates', value);
             },
             deep: true,
         },
-        modelStates: {
+        "pseudoQuery['event:En_Municipio']": {
             handler(value) {
-                this.$emit('update:modelStates', value);
-                this.$emit('changeCities', value);
-            },
-            deep: true,
-        },
-
-        "pseudoQuery['event:municipio']": {
-            handler(value) {
-                this.$emit('update:modelCities', value);
-                this.$emit('changeCities', value);
-            },
-            deep: true,
-        },
-        modelCities: {
-            handler(value) {
-                this.$emit('update:modelCities', value);
+                this.selectedCities = value;
+                this.filterByCities();
                 this.$emit('changeCities', value);
             },
             deep: true,
@@ -179,36 +161,43 @@ app.component('search-filter-event', {
 
     computed: {
         states() {
-            const estados = Object.fromEntries(
-                Object.entries(this.statesAndCities).map(([UF, estado]) => [UF, estado.label])
+            return Object.fromEntries(
+                Object.entries(this.statesAndCities).map(([uf, estado]) => [uf, estado.label])
             );
-
-            return estados;
         },
-
         cities() {
-            const estadosSelecionados = this.pseudoQuery['event:estado'] || [];
+            const estadosSelecionados = this.pseudoQuery['event:En_Estado'] || [];
             let cidades = {};
-    
-            if (estadosSelecionados.length === 1) {
-                const state = estadosSelecionados[0];
-                for (let i = 0; i < this.statesAndCities[state].cities.length; i++) {
-                    const city = this.statesAndCities[state].cities[i];
-                    cidades[city] = city;
+
+            estadosSelecionados.forEach(uf => {
+                if (this.statesAndCities[uf]?.cities) {
+                    this.statesAndCities[uf].cities.forEach(cidade => {
+                        cidades[cidade] = estadosSelecionados.length > 1 ? `${cidade} - ${uf}` : cidade;
+                    });
                 }
-            }
-    
-            if (estadosSelecionados.length > 1) {
-                for (const state of estadosSelecionados) {
-                    for (let i = 0; i < this.statesAndCities[state].cities.length; i++) {
-                        const city = this.statesAndCities[state].cities[i];
-                        cidades[city] = `${city} - ${state}`;
-                    }
-                }
-            }
-    
+            });
+
             return cidades;
         },
+
+        selectedStates: {
+            get() {
+                return this.pseudoQuery['event:En_Estado'] || [];
+            },
+            set(value) {
+                this.pseudoQuery['event:En_Estado'] = value;
+                this.filterByState();
+            }
+        },
+        selectedCities: {
+            get() {
+                return this.pseudoQuery['event:En_Municipio'] || [];
+            },
+            set(value) {
+                this.pseudoQuery['event:En_Municipio'] = value;
+                this.filterByCities();
+            }
+        }
     },
 
     data() {
@@ -231,17 +220,39 @@ app.component('search-filter-event', {
             date: [this.defaultDateFrom, this.defaultDateTo],
             presetRanges: presetRanges,
             ageRating: $DESCRIPTIONS.event.classificacaoEtaria.optionsOrder,
-            statesAndCities: $MAPAS.config.statesAndCities,
             sealsNames: $MAPAS.config.event_filters.seals.map(seal => seal.name),
+            statesAndCities: $MAPAS.config.statesAndCities,
+            selectedStates: [],
+            selectedCities: [],
         }
     },
 
     methods: {
+        filterByState() {
+            if (this.pseudoQuery['event:En_Estado']?.length > 0) {
+                // Formato já é gerenciado pelo mc-multiselect
+            } else {
+                delete this.pseudoQuery['event:En_Estado'];
+            }
+            this.$emit('filter-changed');
+        },
+
+        filterByCities() {
+            if (this.pseudoQuery['event:En_Municipio']?.length > 0) {
+                // Formato já é gerenciado pelo mc-multiselect
+            } else {
+                delete this.pseudoQuery['event:En_Municipio'];
+            }
+            this.$emit('filter-changed');
+        },
+
         clearFilters() {
+            this.selectedStates = [];
+            this.selectedCities = [];
+
             const types = ['string', 'boolean'];
             this.date = [this.defaultDateFrom, this.defaultDateTo];
             for (const key in this.pseudoQuery) {
-                console.log(key+'\n', typeof this.pseudoQuery[key]);
                 if (['@from', '@to'].includes[key]) {
                     this.pseudoQuery[key] = new McDate(new Date(key == '@from' ? this.date[0] : this.date[1])).date('sql');
                 } else {
@@ -251,7 +262,8 @@ app.component('search-filter-event', {
                         delete this.pseudoQuery[key];
                     }
                 }
-            }       
+            }
+            this.$emit('filter-changed');   
         },
 
         dateFormat(date) {

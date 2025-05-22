@@ -33,7 +33,7 @@ $this->import('
             <?= i::_e('Filtros') ?>
         </label>
     </div>
-    <form class="form" @submit="$event.preventDefault()" style="max-height: 100%">
+    <form class="form" @submit="$event.preventDefault()" style="max-height: none !important;">
         <?php $this->applyTemplateHook('search-filter-event', 'begin') ?>
         <div class="field">
             <label> <?php i::_e('Período') ?></label>
@@ -83,14 +83,41 @@ $this->import('
                 
         <div class="field">
             <label><?= i::__('Estado') ?></label>
-            <mc-multiselect :model="pseudoQuery['event:estado']" title="<?php i::_e('Estado') ?>" :items="states" placeholder="<?= i::esc_attr__('Todos') ?>" hide-filter hide-button></mc-multiselect>
-            <mc-tag-list editable :tags="pseudoQuery['event:estado']" :labels="states" classes="agent__background agent__color"></mc-tag-list>
+            <mc-multiselect 
+                :model="pseudoQuery['event:En_Estado']"
+                :items="states"
+                @change="filterByState"
+                title="<?php i::_e('Estado') ?>"
+                placeholder="<?= i::esc_attr__('Todos') ?>"
+                hide-filter
+                hide-button
+            ></mc-multiselect>
+            <mc-tag-list 
+                editable 
+                :tags="pseudoQuery['event:En_Estado']" 
+                :labels="states" 
+                classes="agent__background agent__color"
+            ></mc-tag-list>
         </div>
 
         <div class="field">
             <label><?= i::__('Municípios') ?></label>
-            <mc-multiselect :model="pseudoQuery['event:municipio']" title="<?php i::_e('Municípios') ?>" :items="cities" placeholder="<?= i::esc_attr__('Todos') ?>" :disabled="pseudoQuery['event:estado'].length === 0" hide-filter hide-button></mc-multiselect>
-            <mc-tag-list editable :tags="pseudoQuery['event:municipio']" :labels="cities" classes="agent__background agent__color"></mc-tag-list>
+            <mc-multiselect 
+                :model="pseudoQuery['event:En_Municipio']"
+                :items="cities"
+                @change="filterByCities"
+                title="<?php i::_e('Municípios') ?>"
+                placeholder="<?= i::esc_attr__('Todos') ?>"
+                :disabled="!pseudoQuery['event:En_Estado']?.length"
+                hide-filter
+                hide-button
+            ></mc-multiselect>
+            <mc-tag-list 
+                editable 
+                :tags="pseudoQuery['event:En_Municipio']" 
+                :labels="cities" 
+                classes="agent__background agent__color"
+            ></mc-tag-list>
         </div>
         
         <?php $this->applyTemplateHook('search-filter-event', 'end') ?>
