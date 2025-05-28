@@ -14,5 +14,6 @@ $this->import('
 ');
 ?>
 <home-header></home-header>
-<home-entities></home-entities>
+
 <home-register></home-register>
+<home-map></home-map>

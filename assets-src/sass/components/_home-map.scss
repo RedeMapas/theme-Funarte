@@ -1,0 +1,193 @@
+
+
+
+.home-map {
+    display: flex;
+    flex-direction: column;
+    gap: size(27);
+    padding: size(80) size(16);
+    position: relative;
+    background-color: var(--mc-home-map);
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+        gap: size(4);
+        margin: 0 auto;
+        max-width: size(1170);
+        width: 100%;
+
+        .title {
+            font-size: size(32);
+            font-weight: 700;
+            line-height: size(44);  
+
+            @media (max-width:size(800)) {
+                font-size: size(24);
+                line-height: size(28);
+            }
+        }
+
+        .description {
+            font-size: size(18);
+            font-weight: 400;
+            line-height: size(25);
+
+            @media (max-width:size(800)) {
+                font-size: size(14);
+                line-height: size(19);
+            }
+        }
+    }
+
+    &__content {
+        max-width: size(1170);
+        margin: 0 auto;
+        position: relative;
+        width: 100%;      
+        
+        .leaflet-container {
+            border-radius: var(--mc-border-radius-sm);
+            z-index:0;
+        }
+    } 
+
+
+    .search-map {
+        &__filter {
+            display: flex;
+            justify-content: flex-end;
+            max-width: size(1170);
+            margin: 0 auto;
+            padding: 0 size(16);
+
+            &--filter {
+                position: absolute;
+                z-index: 1;
+            }
+        }
+
+        &__events {
+
+            overflow-y: auto;
+            position: absolute;
+            width: size(360);
+            background-color: var(--mc-gray-100);
+            top: 0;
+            height: 100%;
+            left: 0;
+            padding: 0 size(16) size(16);
+
+            &--close {
+                float: right;
+                font-weight: 600;
+                font-size: size(16);
+                line-height: size(22);
+                color: var(--mc-low-700);
+
+                .iconify {
+                    width: size(22);
+                    height: size(22);
+                }
+
+                &:hover {
+                    color: var(--mc-low-500);
+                }
+            }
+
+            &--adress {
+                display: flex;
+                align-items: baseline;
+                justify-content: center;
+                gap: size(8);
+
+                .iconify {
+                    background-color: white;
+                    min-width: max-content;
+                }
+
+                &-label {
+                    font-weight: 600;
+                    font-size: size(14);
+                    line-height: size(19);
+                }
+            }
+
+            &--spaces {
+                clear: both;
+                padding: size(14) size(16) size(21);
+                background-color: var(--mc-white);
+                border-radius: var(--mc-border-radius-xs);
+
+                &-title {
+                    font-weight: 600;
+                    font-size: size(16);
+                    line-height: size(22);
+                }
+
+                .space-link {
+                    display: flex;
+                    gap: size(6);
+                    align-items: center;
+
+                    &__icon {
+                        width: size(32);
+                        height: size(32);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: var(--mc-border-radius-pill);
+                        background-color: var(--mc-spaces-500);
+
+                        .iconify {
+                            color: var(--mc-white);
+                        }
+                    }
+
+                    a {
+                        text-decoration: none;
+                        color: var(--mc-low-500);
+                        margin: size(16) 0;
+                        font-weight: 700;
+                        font-size: size(18);
+                        line-height: size(25);
+                    }
+
+                }
+
+            }
+        }
+
+        &__cards {
+            position: relative;
+
+            //aqui é o estilo do marcador de tempo
+            &--date {
+                align-items: center;
+                display: flex;
+                gap: size(8);
+                margin: size(20) 0;
+
+                &-info {
+                    display: flex;
+                    flex-direction: column;
+                    left: 0;
+                    position: relative;
+                    text-align: right;
+
+                    .weekend {
+                        font-size: size(13);
+                    }
+                }
+
+                &-line {
+                    height: size(1);
+                    background: black;
+                    flex-grow: 1;
+                }
+            }
+        }   
+    }
+
+    
+}
