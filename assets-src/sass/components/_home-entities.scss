@@ -140,7 +140,7 @@ $entities-colors: (
         }
 
         @media (max-width: 768px) {
-          
+
           & .right {
             margin-left: 0px;
           }
@@ -154,11 +154,11 @@ $entities-colors: (
             background-color: transparent;
             align-items: center;
             justify-content: center;
-        
+
             &::before {
               display: none;
             }
-        
+
             .icon {
               margin: 0;
               width: 35px;
@@ -172,7 +172,7 @@ $entities-colors: (
             }
           }
         }
-        
+
         @media (max-width: 480px) {
           & .right {
             margin-left: 0px;
@@ -180,7 +180,7 @@ $entities-colors: (
           & .tag {
             top: -5px;
             height: 40px;
-        
+
             .icon {
               width: 30px;
               height: 30px;

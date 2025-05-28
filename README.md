@@ -5,10 +5,10 @@
 Antes de utilizarmos o tema, é necessário compilar a folha de estilo SASS. Para isso, certifique-se de ter o [compilador do SASS](https://sass-lang.com/dart-sass/) instalado, navegue pelo terminal até a pasta **assets/css** e execute o seguinte comando:
 
 ```bash
-sass --watch ../../assets-src/sass/theme-Funarte.scss:theme-Funarte.css
+sass --watch ../../assets-src/sass/theme-BaseV2.scss:theme-BaseV2.css
 ```
 
-Esse comando fará com que o compilador do Sass fique monitorando a folha de estilos **theme-Funarte.scss** e, caso haja mudanças, o arquivo será compilado para CSS.
+Esse comando fará com que o compilador do Sass fique monitorando a folha de estilos **theme-BaseV2.scss** e, caso haja mudanças, o arquivo será compilado para CSS.
 
 ## Selecionando o tema
 

@@ -54,7 +54,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
                 </script>
 ";
         });
-        $app->hook("ApiQuery(<<project|opportunity|space|event>>).params", function(&$api_params) use($app) {
+        $app->hook("ApiQuery(<<project|opportunity|event>>).params", function(&$api_params) use($app) {
             if($subsite = $app->subsite){
                 $api_params['_subsiteId'] = API::EQ($subsite->id);
             }

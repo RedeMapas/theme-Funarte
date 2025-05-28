@@ -40,7 +40,7 @@ $home-feature: #45B648;
 $home-register: #036293;
 
 // // Neutral colors
-// $low-500: #1E1E1E;
+$low-500: #181B4E;
 // $high-500: #FFFFFF;
 
 // // FONTS
@@ -64,10 +64,13 @@ $home-register: #036293;
 // $shadow-lv-1-up: 0px -4px 8px rgba(0, 0, 0, 0.16);
 
 @import '../../../BaseV2/assets-src/sass/theme-BaseV2';
-@import './components/_search-filter.scss';
-@import './components/_home-map.scss';
-@import './components/home-entities.scss';
-@import './layouts/_home-register.scss';
+@import './components/search-filter';
+@import './components/home-map';
+@import './components/home-entities';
+@import './components/events-stats-cards';x
+@import './layouts/home-register';
+@import './pages/search';
+
 
 .mc-header-logo {
     max-width: 9rem;
