@@ -1,0 +1,122 @@
+.home-prosas-notices {
+	background-color: var(--mc-white);
+	display: flex;
+	flex-direction: column;
+	gap: size(40);
+	margin: 0 auto;
+	padding: size(60) size(16);
+	position: relative;
+	width: 100%;
+
+	&__header,
+	&__content {
+		margin: 0 auto;
+		width: 100%;
+	}
+
+	&__header, &__content {
+		max-width: size(1170);
+	}
+
+	&__header {
+
+		&.title {
+			display: flex;
+			justify-content: space-between;
+			margin: 0;
+
+			label {
+				font-size: size(32);
+				font-weight: 700;
+				line-height: size(44);
+			 
+				@media (max-width: size(500)) {
+					font-size: size(24);
+					line-height: size(28);
+				}
+			}
+		}
+
+		&.description {
+			font-size: size(16);
+			font-weight: 400;
+			line-height: size(22);
+			margin: 0;
+			width: 100%;
+		}
+	}
+
+	&__content {
+		.tabs-component {
+			margin: 0 auto;
+
+			&__button--active {
+				a {	
+            		padding: size(7) size(4);
+				}
+
+				&::after {
+					background-color: $button
+				}
+			}
+
+			&__panels {
+				margin: 0;
+			}
+		}
+
+		prosas-listagem-editais::part(container-listagem) {
+			padding: 0;
+		}
+
+		prosas-listagem-editais::part(item-nome) {
+			font-weight: 900;
+			font-size: size(17);
+			margin-bottom: size(10);
+			color: $button;
+		}
+
+		prosas-listagem-editais::part(global-text item-nome-incentivador) {
+			font-weight: 600 !important;
+			font-size: size(13);
+			margin-bottom: size(25) !important;
+		}
+
+		prosas-listagem-editais::part(item-division-line) {
+			display: none;
+		}
+
+		prosas-listagem-editais::part(prosas-button) {
+			width: 200%;
+			height: size(37);
+			margin: 0 size(50) 0 size(-43);
+			font-weight: 600;
+			background-color: $low-500;
+			border-width: 0;
+		}
+
+		prosas-listagem-editais::part(global-text) {
+			font-weight: 400;
+			font-size: size(14.5);
+		}
+
+		prosas-listagem-editais::part(edital-data-inscricao) {
+			font-weight: 700;
+			border-width: 0;
+			margin-top: size(10);
+			color: $low-500;
+		}
+
+		prosas-listagem-editais::part(global-text item-tag-text) {
+			font-weight: 800 !important;
+			font-size: size(12) !important;
+			margin-bottom: 0 !important;
+		}
+
+		prosas-listagem-editais::part(edital-info-text edital-info-tag) {
+			color: $white !important;
+			background-color: $button !important;
+			height: size(27) !important;
+		}
+	}
+}
