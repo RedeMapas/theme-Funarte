@@ -5,9 +5,22 @@ namespace Funarte;
 use MapasCulturais\App;
 use MapasCulturais\API;
 
-// class Theme extends \Subsite\Theme {
 class Theme extends \MapasCulturais\Themes\BaseV2\Theme
 {
+    public function register()
+    {
+        parent::register();
+        $app = \MapasCulturais\App::i();
+        $app->registerController('funarte', 'Funarte\Controller');
+
+        // Register custom route
+        $app->hook('slim.before.dispatch', function () use ($app) {
+            $app->hook('slim.before.404', function () use ($app) {
+                $app->controller('funarte')->notFound();
+            });
+        });
+    }
+
     static function getThemeFolder()
     {
         return __DIR__;
@@ -59,5 +72,19 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
                 $api_params['_subsiteId'] = API::EQ($subsite->id);
             }
         });
+        $app->hook('GET(site.museus)', function() use ($app) {
+          $app = App::i();
+          die('aquiiii 23333 museus');
+
+          // $initial_pseudo_query = [];
+
+          // $app->applyHookBoundTo($this, 'search-memory-point-initial-pseudo-query', [&$initial_pseudo_query]);
+
+          // if($seal_id = $app->config['museus.memoryPoint.sealId']) {
+          //     $initial_pseudo_query['@seals'] = "$seal_id";
+          // }
+
+          // $this->render('space', ['initial_pseudo_query' => $initial_pseudo_query]);
+      });
     }
 }
