@@ -75,3 +75,15 @@ $low-500: #181B4E;
 .mc-header-logo {
     max-width: 9rem;
 }
+
+.controller-circuitos .mc-header-menu--item.circuitos .icon {
+  background-color:#F24797;
+}
+
+.mc-header-menu--item.circuitos:hover .icon {
+  background-color:#F24797;
+}
+
+.controller-circuitos .mc-header-menu--item.circuitos .label {
+  color: #F24797;
+}
