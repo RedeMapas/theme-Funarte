@@ -1,4 +1,5 @@
 <?php
+
 use \MapasCulturais\i;
 
 return [
@@ -48,7 +49,6 @@ return [
         'shortcuts' => [
             // busca
             'agentes'           => ['search', 'agents'],
-            'circuitos'           => ['search', 'events'],
             'espacos'           => ['search', 'spaces'],
             'oportunidades'     => ['search', 'opportunities'],
             'iniciativas'          => ['search', 'projects'],
