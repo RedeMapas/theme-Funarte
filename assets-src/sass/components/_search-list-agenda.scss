@@ -1,0 +1,69 @@
+.agenda-wrapper {
+  background-color: #F5F5F5;
+  padding: 2rem 0;
+
+  .search-list {
+    width: 100%;
+
+    .search-section + .search-section {
+      margin-top: 1.5rem;
+    }
+
+    .agenda-title {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #333;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.4;
+      max-width: 1200px;
+      padding: 0 1rem;
+
+      &::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background-color: #ccc;
+      }
+    }
+
+    .grid-12.with-gap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 1.5rem;
+      padding: 0 1rem;
+
+      > .col-4 {
+        flex: 0 0 calc(33.333% - 1rem);
+        max-width: calc(33.333% - 1rem);
+        box-sizing: border-box;
+
+        > * {
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #fff;
+        }
+      }
+
+      @media (max-width: 1200px) {
+        > .col-4 {
+          flex: 0 0 calc(50% - 1rem);
+          max-width: calc(50% - 1rem);
+        }
+      }
+
+      @media (max-width: 786px) {
+        > .col-4 {
+          flex: 0 0 100%;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}

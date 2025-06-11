@@ -23,7 +23,7 @@ $this->import('
     mc-share-links
     space-info
     mc-tab
-    mc-tabs
+    mc-tabs-agenda
     opportunity-list
     search-list-agenda
 ');
@@ -53,7 +53,7 @@ $this->breadcrumb = [
             </dl>
         </template>
     </entity-header>
-    <mc-tabs class="tabs" sync-hash>
+    <mc-tabs-agenda class="tabs" sync-hash>
         <?php $this->applyTemplateHook('tabs','begin') ?>
         <mc-tab icon="exclamation" label="<?= i::_e('Informações') ?>" slug="info">
             <div class="tabs__info">
@@ -99,19 +99,17 @@ $this->breadcrumb = [
             </div>
         </mc-tab>
         <mc-tab icon="event" label="<?= i::_e('Agenda') ?>" slug="agenda">
-            <div class="search__tabs--list">
-                <search-list-agenda 
-                    :pseudo-query='<?= json_encode([
-                        "space:id" => $entity->id,
-                        "@from" => date("Y-m-d"),
-                        "@to" => date("Y") . "-12-31"
-                    ]) ?>'
-                    select="id,name,subTitle,files.avatar,seals,terms,classificacaoEtaria,singleUrl"
-                    space-select="id,name,endereco,files.avatar,singleUrl"
-                />
-            </div>
+            <search-list-agenda 
+                :pseudo-query='<?= json_encode([
+                    "space:id" => $entity->id,
+                    "@from" => (new \DateTime("now", new \DateTimeZone("America/Sao_Paulo")))->format("Y-m-d"),
+                    "@to" => date("Y") . "-12-31"
+                ]) ?>'
+                select="id,name,subTitle,files.avatar,seals,terms,classificacaoEtaria,singleUrl"
+                space-select="id,name,endereco,files.avatar,singleUrl"
+            />
         </mc-tab>
         <?php $this->applyTemplateHook('tabs','end') ?>
-    </mc-tabs>
+    </mc-tabs-agenda>
     <entity-actions :entity="entity"></entity-actions>
 </div>
