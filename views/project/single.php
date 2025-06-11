@@ -158,7 +158,7 @@ if($children_id ){
             <search-list-agenda 
                 :pseudo-query='<?= json_encode([
                     "event:project" => $entity->id,
-                    "@from" => date("Y-m-d"),
+                    "@from" => (new \DateTime("now", new \DateTimeZone("America/Sao_Paulo")))->format("Y-m-d"),
                     "@to" => date("Y") . "-12-31"
                 ]) ?>'
                 select="id,name,subTitle,files.avatar,seals,terms,classificacaoEtaria,singleUrl,project"

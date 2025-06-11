@@ -1,11 +1,13 @@
 .agenda-wrapper {
   background-color: #F5F5F5;
   padding: 2rem 0;
-  display: flex;
-  justify-content: center;
 
   .search-list {
     width: 100%;
+
+    .search-section + .search-section {
+      margin-top: 1.5rem;
+    }
 
     .agenda-title {
       display: flex;
@@ -30,7 +32,7 @@
     .grid-12.with-gap {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
       max-width: 1200px;
       margin: 0 auto;
       gap: 1.5rem;
