@@ -45,7 +45,7 @@ $this->import('
                 </p>
 
             </div>
-            <mc-entities type="event" endpoint="occurrences" :raw-processor="occurrenceRawProcessor" :query="spaceQuery" watch-query>
+            <mc-entities type="event" endpoint="occurrences" :raw-processor="occurrenceRawProcessor" :query="spaceQuery">
                 <template #default="{entities}">
                     <template v-for="occurrence in entities" :key="occurrence._reccurrence_string">
                         <div class="search-map__card">
