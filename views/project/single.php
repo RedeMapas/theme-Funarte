@@ -26,7 +26,7 @@ $this->import('
     mc-container
     mc-share-links
     mc-tab
-    mc-tabs
+    mc-tabs-agenda
     search-list-agenda
 ');
 
@@ -65,7 +65,7 @@ if($children_id ){
             </dl>
         </template>
     </entity-header>
-    <mc-tabs class="tabs" sync-hash>
+    <mc-tabs-agenda class="tabs" sync-hash>
         <mc-tab icon="exclamation" label="<?= i::_e('Informações') ?>" slug="info">
             <div class="tabs__info">
                 <mc-container>
@@ -155,18 +155,16 @@ if($children_id ){
             </div>
         </mc-tab>
         <mc-tab icon="event" label="<?= i::_e('Agenda') ?>" slug="agenda">
-            <div class="search__tabs--list">
-                <search-list-agenda 
-                    :pseudo-query='<?= json_encode([
-                        "event:project" => $entity->id,
-                        "@from" => date("Y-m-d"),
-                        "@to" => date("Y") . "-12-31"
-                    ]) ?>'
-                    select="id,name,subTitle,files.avatar,seals,terms,classificacaoEtaria,singleUrl,project"
-                    space-select="id,name,endereco,files.avatar,singleUrl"
-                />
-            </div>
+            <search-list-agenda 
+                :pseudo-query='<?= json_encode([
+                    "event:project" => $entity->id,
+                    "@from" => date("Y-m-d"),
+                    "@to" => date("Y") . "-12-31"
+                ]) ?>'
+                select="id,name,subTitle,files.avatar,seals,terms,classificacaoEtaria,singleUrl,project"
+                space-select="id,name,endereco,files.avatar,singleUrl"
+            />
         </mc-tab>
-    </mc-tabs>
+    </mc-tabs-agenda>
     <entity-actions :entity="entity"></entity-actions>
 </div>
