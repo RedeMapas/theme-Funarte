@@ -48,7 +48,7 @@ return [
         'shortcuts' => [
             // busca
             'agentes'           => ['search', 'agents'],
-            'circuitos'           => ['search', 'events'],
+            'eventos'           => ['search', 'events'],
             'espacos'           => ['search', 'spaces'],
             'oportunidades'     => ['search', 'opportunities'],
             'iniciativas'          => ['search', 'projects'],

@@ -1,9 +1,12 @@
 <?php
+
 /**
  * @var MapasCulturais\App $app
  * @var MapasCulturais\Themes\BaseV2\Theme $this
  */
+
 use MapasCulturais\i;
+
 $this->import('
     mc-map 
     mc-map-card
@@ -15,21 +18,21 @@ $this->import('
 <div v-if="(true) && (global.enabledEntities.events)" class="home-map">
     <div class="home-map__header">
         <label class="title"><?= $this->text('title', i::__('Descubra eventos perto de você')) ?></label>
-        <label class="description"><?= $this->text('description', i::__('Explore a programação artística da sua região e descubra o que está acontecendo nos arredores. Use o mapa para encontrar eventos, oficinas, shows e muito mais.')) ?></label>
+        <label class="description"><?= $this->text('description', i::__('Conheça a programação artística da sua região e o que está acontecendo nos arredores. Use o mapa para encontrar eventos, oficinas, shows e muito mais!')) ?></label>
     </div>
 
 
-    
+
     <div class="home-map__content">
         <search-map type="space" endpoint="findByEvents" :pseudo-query="pseudoQuery" :entityRawProcessor="spaceRawProcessor" @open-popup="open($event)" @close-popup="close($event)">
             <template #filter>
-                
-            </template>
-         </search-map>
 
-         <div v-if="space" class="search-map__events">
-            <a class="search-map__events--close button button--icon" @click="close()"><?= i::__('Fechar');?> <mc-icon name="close"></mc-icon></a>
-            
+            </template>
+        </search-map>
+
+        <div v-if="space" class="search-map__events">
+            <a class="search-map__events--close button button--icon" @click="close()"><?= i::__('Fechar'); ?> <mc-icon name="close"></mc-icon></a>
+
             <div class="search-map__events--spaces">
                 <label class="search-map__events--spaces-title"><?= i::__('Eventos encontrados no espaço:') ?></label>
 
@@ -73,6 +76,6 @@ $this->import('
                 </template>
             </mc-entities>
         </div>
-    
+
     </div>
 </div>
