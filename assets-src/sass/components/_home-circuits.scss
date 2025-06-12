@@ -1,54 +1,94 @@
-.circuits{
-    width:100%;
-    height:523px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    padding: 0px 134px;
+.custom-background{
+  background-color: #F5F5F5;
+  padding:10px 0px;
 
-    @media screen and (max-width:768px) {
-        padding:0 20px;
+}
+
+.divider-line{
+  background-color: #BBBBBB;
+  height: 1px;
+  width: 100%; 
+}
+
+.hero-circuits {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4rem 6rem;
+      min-height: 466px;
+      background-color: #CCEFED;
     }
 
-    &--text{
-      color: white;
-      text-align: left;
-      max-width: 572px;
+    .hero-circuits--text {
+      max-width: 560px;
+      color:#101010;
+    }
 
-      h1{
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 17px;
-      }
+    .hero-circuits--text img {
+      margin-bottom: 2rem;
+      max-width: 190px;
+    }
 
-      p{
-        font-size: 18px;
-        margin-bottom: 17px;
-      }
+    .hero-circuits--text h1 {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
 
-      ul{
-        line-height: 25px;
-      }
+    .hero-circuits--text p {
+      font-size: 18px;
+      line-height: 25px;
+    }
 
-      button{
+    .hero-circuits--text strong {
+      font-weight: bold;
+    }
 
+    .hero-circuits--text button{
         a{
           font-size: 14px;
-          color:#181B4E;
+          color:#FEFAF6;
           font-weight: 600;
         }
 
         margin-top: 17px;
-        background-color: white;
+        background-color: #181B4E;
         width:230px;
         height:38px;
         border-radius: 8px;
         border: none;
+    }
+
+    .hero-circuits--image {
+      max-width: 50%;
+    }
+
+    .hero-circuits--image img {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Responsivo */
+    @media (max-width: 1024px) {
+      .hero-circuits {
+        flex-direction: column;
+        text-align: left;
+        padding: 3rem 2rem;
       }
 
+      .hero-circuits--text {
+        max-width: 100%;
+        margin-bottom: 2rem;
+      }
 
+      .hero-circuits--image {
+        max-width: 90%;
+      }
+
+      .hero-circuits--text img {
+        margin: 0 auto 1.5rem;
+      }
     }
-  }
+
+
