@@ -10,10 +10,7 @@ app.component('search-list-event', {
 
     data() {
         return {
-            occurrences: {
-                metadata: { page: 1, numPages: 1, count: 0 },
-                length: 0
-            },
+            occurrences: [],
             loading: false,
             page: 1
         }
@@ -45,7 +42,7 @@ app.component('search-list-event', {
         },
         spaceSelect: {
             type: String,
-            default: 'id,name,endereco,files.avatar,singleUrl'
+            default: 'name,endereco'
         },
         pseudoQuery: {
             type: Object,
@@ -55,45 +52,41 @@ app.component('search-list-event', {
 
     methods: {
         // http://localhost/api/event/findOccurrences?@from=2022-08-19&@to=2022-09-19&space:@select=id,name,shortDescription,endereco&@select=
-        async fetchOccurrences() {
-            const query = Utils.parsePseudoQuery(this.pseudoQuery);
-
-            // Mantém os filtros de localização
-            if (this.pseudoQuery['En_Estado']) {
-                query['En_Estado'] = this.pseudoQuery['En_Estado'];
-            }
-            if (this.pseudoQuery['En_Municipio']) {
-                query['En_Municipio'] = this.pseudoQuery['En_Municipio'];
+        async fetchOccurrences(query = null) {
+            if (query === null) {
+                query = Utils.parsePseudoQuery(this.pseudoQuery);
             }
 
             this.loading = true;
+            if(query['@keyword']) {
+                query['event:@keyword'] = query['@keyword'];
+                delete query['@keyword'];
+            }
+
             query['event:@select'] = this.select;
             query['space:@select'] = this.spaceSelect;
             query['@limit'] = this.limit;
             query['@page'] = this.page;
-
+            
             try {
                 const occurrences = await this.eventApi.fetch('occurrences', query, {
                     raw: true,
                     rawProcessor: (rawData) => Utils.occurrenceRawProcessor(rawData, this.eventApi, this.spaceApi)
                 });
-
-                const metadata = occurrences.metadata || { page: 1, numPages: 1, count: 0 };
-
-                if (this.page === 1) {
+                
+                const metadata = occurrences.metadata
+    
+                if(this.page === 1) {
                     this.occurrences = occurrences;
-                    this.occurrences.metadata = metadata;
                 } else {
                     this.occurrences = this.occurrences.concat(occurrences);
                     this.occurrences.metadata = metadata;
                 }
-            } catch (error) {
-                if (error.name !== 'AbortError') {
-                    console.error('Erro ao buscar ocorrências:', error);
-                }
-                // Se for AbortError, apenas ignore
-            } finally {
                 this.loading = false;
+            } catch (error) {
+                console.error('Erro ao buscar ocorrências:', error);
+                this.loading = false;
+                return;
             }
         },
 

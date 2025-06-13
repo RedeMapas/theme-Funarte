@@ -22,8 +22,6 @@ $this->import('
     mc-multiselect
     mc-tag-list
     search-filter
-    mc-states-and-cities
-    
 ');
 ?>
 <search-filter :position="position" :pseudo-query="pseudoQuery">
@@ -55,7 +53,7 @@ $this->import('
             </div>
         </div>
         <div class="field">
-            <label class="verified"><input v-model="pseudoQuery['event:@verified']" type="checkbox"> <?php i::_e('Eventos oficiais') ?> </label>
+            <label class="verified"><input v-model="pseudoQuery['@verified']" type="checkbox"> <?php i::_e('Eventos oficiais') ?> </label>
         </div>
         
         <div class="field">
@@ -84,7 +82,7 @@ $this->import('
         <div class="field">
             <label><?= i::__('Estado') ?></label>
             <mc-multiselect 
-                :model="pseudoQuery['event:En_Estado']"
+                :model="pseudoQuery['En_Estado']"
                 :items="states"
                 @change="filterByState"
                 title="<?php i::_e('Estado') ?>"
@@ -94,7 +92,7 @@ $this->import('
             ></mc-multiselect>
             <mc-tag-list 
                 editable 
-                :tags="pseudoQuery['event:En_Estado']" 
+                :tags="pseudoQuery['En_Estado']" 
                 :labels="states" 
                 classes="agent__background agent__color"
             ></mc-tag-list>
@@ -103,18 +101,18 @@ $this->import('
         <div class="field">
             <label><?= i::__('Municípios') ?></label>
             <mc-multiselect 
-                :model="pseudoQuery['event:En_Municipio']"
+                :model="pseudoQuery['En_Municipio']"
                 :items="cities"
                 @change="filterByCities"
                 title="<?php i::_e('Municípios') ?>"
                 placeholder="<?= i::esc_attr__('Todos') ?>"
-                :disabled="!pseudoQuery['event:En_Estado']?.length"
+                :disabled="!pseudoQuery['En_Estado']?.length"
                 hide-filter
                 hide-button
             ></mc-multiselect>
             <mc-tag-list 
                 editable 
-                :tags="pseudoQuery['event:En_Municipio']" 
+                :tags="pseudoQuery['En_Municipio']" 
                 :labels="cities" 
                 classes="agent__background agent__color"
             ></mc-tag-list>

@@ -14,13 +14,13 @@ $this->import('
 <div class="grid-12 search-list">
     <div class="col-3 search-list__filter">
         <div class="search-list__filter--filter">
-            <search-filter-event :pseudo-query="pseudoQuery" @filter-changed="fetchOccurrences"></search-filter-event>
+            <search-filter-event :pseudo-query="pseudoQuery" :filter-changed="fetchOccurrences"></search-filter-event>
         </div>
     </div>
     <mc-loading :condition="loading && page == 1"></mc-loading>
     <div v-if="!loading || page > 1" class="col-9 search-list__cards">
         <div class="grid-12">
-            <div v-for="occurrence in occurrences" :key="occurrence._reccurrence_string" class="col-12" v-if="occurrence && occurrence.event">
+            <div v-for="occurrence in occurrences" :key="occurrence._reccurrence_string" class="col-12">
                 <div v-if="newDate(occurrence)" class="search-list__cards--date">
                     <div class="search-list__cards--date-info">
                         <h2 v-if="occurrence.starts.isToday()" class="actual-date"><?= i::__('Hoje') ?><label class="month"><?= i::__('{{occurrence.starts.month()}}')?></label></h2>
@@ -36,7 +36,7 @@ $this->import('
                 <occurrence-card :occurrence="occurrence" ></occurrence-card>
             </div>
 
-            <div v-if="occurrences.metadata && occurrences.metadata.page < occurrences.metadata.numPages" class="col-12 load-more">
+            <div v-if="occurrences.metadata.page < occurrences.metadata.numPages" class="col-12 load-more">
                 <mc-loading :condition="loading && page > 1"></mc-loading>
                 <button v-if="!loading" class="button--large button button--primary-outline" @click="loadMore()"><?php i::_e('Carregar Mais') ?></button>
             </div>

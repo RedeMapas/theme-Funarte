@@ -110,8 +110,8 @@ app.component('search-filter-event', {
         this.pseudoQuery['event:term:linguagem'] = this.pseudoQuery['event:term:linguagem'] || [];
         this.pseudoQuery['event:classificacaoEtaria'] = this.pseudoQuery['event:classificacaoEtaria'] || [];
         this.pseudoQuery['event:selos'] = this.pseudoQuery['event:selos'] || [];
-        this.pseudoQuery['event:En_Estado'] = this.pseudoQuery['event:En_Estado'] || [];
-        this.pseudoQuery['event:En_Municipio'] = this.pseudoQuery['event:En_Municipio'] || [];
+        this.pseudoQuery['En_Estado'] = this.pseudoQuery['En_Estado'] || [];
+        this.pseudoQuery['En_Municipio'] = this.pseudoQuery['En_Municipio'] || [];
     },
     
     props: {
@@ -126,17 +126,17 @@ app.component('search-filter-event', {
     },
 
     watch: {
-        "pseudoQuery['event:En_Estado']": {
+        "pseudoQuery['En_Estado']": {
             handler(value) {
-                this.selectedStates = value;
+                // this.selectedStates = value;
                 this.filterByState();
                 this.$emit('changeStates', value);
             },
             deep: true,
         },
-        "pseudoQuery['event:En_Municipio']": {
+        "pseudoQuery['En_Municipio']": {
             handler(value) {
-                this.selectedCities = value;
+                // this.selectedCities = value;
                 this.filterByCities();
                 this.$emit('changeCities', value);
             },
@@ -179,25 +179,6 @@ app.component('search-filter-event', {
 
             return cidades;
         },
-
-        selectedStates: {
-            get() {
-                return this.pseudoQuery['event:En_Estado'] || [];
-            },
-            set(value) {
-                this.pseudoQuery['event:En_Estado'] = value;
-                this.filterByState();
-            }
-        },
-        selectedCities: {
-            get() {
-                return this.pseudoQuery['event:En_Municipio'] || [];
-            },
-            set(value) {
-                this.pseudoQuery['event:En_Municipio'] = value;
-                this.filterByCities();
-            }
-        }
     },
 
     data() {
@@ -214,9 +195,17 @@ app.component('search-filter-event', {
             this.ranges.thisYear,
         ];
 
+        let query = {
+            '@select': 'id,name,subTitle,files.avatar,seals,terms,classificacaoEtaria,singleUrl',
+            '@order': 'createTimestamp DESC',
+            '@limit': 20,
+            '@page': 1,
+        }
+
         return {
             locale: $MAPAS.config.locale,
             terms: $TAXONOMIES.linguagem.terms,
+            query,
             date: [this.defaultDateFrom, this.defaultDateTo],
             presetRanges: presetRanges,
             ageRating: $DESCRIPTIONS.event.classificacaoEtaria.optionsOrder,
@@ -229,21 +218,21 @@ app.component('search-filter-event', {
 
     methods: {
         filterByState() {
-            if (this.pseudoQuery['event:En_Estado']?.length > 0) {
-                // Formato já é gerenciado pelo mc-multiselect
+            if (this.selectedStates.length > 0) {
+                this.query['En_Estado'] = `IN(${this.selectedStates.toString()})`;
             } else {
-                delete this.pseudoQuery['event:En_Estado'];
+                delete this.query['En_Estado'];
             }
-            this.$emit('filter-changed');
+            this.$emit('filter-changed', this.query);
         },
 
         filterByCities() {
-            if (this.pseudoQuery['event:En_Municipio']?.length > 0) {
-                // Formato já é gerenciado pelo mc-multiselect
+            if (this.selectedCities.length > 0) {
+                this.query['En_Municipio'] = `IN(${this.selectedCities.toString()})`;
             } else {
-                delete this.pseudoQuery['event:En_Municipio'];
+                delete this.query['En_Municipio'];
             }
-            this.$emit('filter-changed');
+            this.$emit('filter-changed', this.query);
         },
 
         clearFilters() {
