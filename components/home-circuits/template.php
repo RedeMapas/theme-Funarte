@@ -9,7 +9,7 @@ use MapasCulturais\i;
 ?>
 
 <?php
-$circuits_url = $app->view->asset('img/home/home-circuits/circuits.jpg', false);
+$circuits_url = $app->view->asset('img/home/home-circuits/circuits.gif', false);
 ?>
 
 <div class="custom-background">
