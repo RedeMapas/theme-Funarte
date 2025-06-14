@@ -6,17 +6,24 @@
 ?>
 
 <?php
-$image_url = $app->view->asset('img/home/home-header/logo-banner.png', false);
+$logo_url = $app->view->asset('img/home/home-header/logo-banner.png', false);
 ?>
 
-<div class="home-header" style="height: 576px">
-  <div class="home-header__background">
-    <div class="img">
-      <img :src="background" alt="Imagem de fundo" />
-    </div>
-  </div>
-  <div class="home-header__overlay">
-    <img src="<?= $image_url ?>" alt="Logo Funarte" />
-  </div>
+<?php
+$mapa_url = $app->view->asset('img/home/home-header/mapa-banner.jpg', false);
+?>
 
-</div>
+<section class="hero">
+    <div class="hero-text">
+      <img src="<?= $logo_url ?>" alt="Logo Funarte" />
+      <h1>Bem-vindo à Plataforma<br>Rede das Artes</h1>
+      <p>
+        Aqui você se conecta com <strong>iniciativas culturais de todo o Brasil</strong>. Descobre
+        <strong>eventos</strong>, encontra <strong>oportunidades</strong> e <strong>fortalece parcerias</strong>
+        em uma rede viva e colaborativa de quem faz arte acontecer.
+      </p>
+    </div>
+    <div class="hero-image">
+      <img src="<?= $mapa_url ?>" alt="Mapa com Linhas Culturais" />
+    </div>
+</section>

@@ -15,7 +15,7 @@ $this->import('
 <div v-if="(true) && (global.enabledEntities.events)" class="home-map">
     <div class="home-map__header">
         <label class="title"><?= $this->text('title', i::__('Descubra eventos perto de você')) ?></label>
-        <label class="description"><?= $this->text('description', i::__('Explore a programação artística da sua região e descubra o que está acontecendo nos arredores. Use o mapa para encontrar eventos, oficinas, shows e muito mais.')) ?></label>
+        <label class="description"><?= $this->text('description', i::__('Conheça a programação artística da sua região e o que está acontecendo nos arredores. Use o mapa para encontrar eventos, oficinas, shows e muito mais.')) ?></label>
     </div>
 
 
