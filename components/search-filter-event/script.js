@@ -107,6 +107,7 @@ app.component('search-filter-event', {
     beforeCreate() {
         this.defaultDateFrom = this.parseDate(this.pseudoQuery['@from']);
         this.defaultDateTo = this.parseDate(this.pseudoQuery['@to']);
+        this.pseudoQuery['event:name'] = this.pseudoQuery['event:name'] || [];
         this.pseudoQuery['event:term:linguagem'] = this.pseudoQuery['event:term:linguagem'] || [];
         this.pseudoQuery['event:classificacaoEtaria'] = this.pseudoQuery['event:classificacaoEtaria'] || [];
         this.pseudoQuery['event:selos'] = this.pseudoQuery['event:selos'] || [];
@@ -166,7 +167,7 @@ app.component('search-filter-event', {
             );
         },
         cities() {
-            const estadosSelecionados = this.pseudoQuery['event:En_Estado'] || [];
+            const estadosSelecionados = this.pseudoQuery['En_Estado'] || [];
             let cidades = {};
 
             estadosSelecionados.forEach(uf => {
@@ -176,7 +177,7 @@ app.component('search-filter-event', {
                     });
                 }
             });
-
+            
             return cidades;
         },
     },

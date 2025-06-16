@@ -42,7 +42,7 @@ app.component('search-list-event', {
         },
         spaceSelect: {
             type: String,
-            default: 'name,endereco'
+            default: 'id,parent_id,location,_geo_location,name,short_description,long_description,create_timestamp,status,type,agent_id,is_verified,public,update_timestamp,subsite_id'
         },
         pseudoQuery: {
             type: Object,

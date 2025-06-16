@@ -58,7 +58,7 @@ $this->import('
         
         <div class="field">
             <label> <?php i::_e('Nome do evento') ?></label>
-            <input @change="setFilter($event.target.value)" id="name" type="text" v-model="pseudoQuery['event:name']" placeholder="<?= i::esc_attr__('Digite') ?>"/>
+            <input id="name" type="text" v-model="pseudoQuery['event:name']" placeholder="<?= i::esc_attr__('Digite') ?>"/>
         </div>
 
         <div class="field">
