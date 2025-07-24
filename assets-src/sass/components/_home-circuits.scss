@@ -12,40 +12,54 @@
 
 .hero-circuits {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      
       justify-content: space-between;
-      padding: 4rem 6rem;
+      padding: 4rem 0;
       min-height: 466px;
-      background-color: #F087AB;
+      background-color: $white;
+      max-width: size(1170);
+      padding-left: size(25);
+      margin: 0 auto;
+      gap:0 12rem;
     }
 
-    .hero-circuits--text {
-      max-width: 560px;
-      color:#101010;
+    .hero-circuits--top{
+      gap: 10rem;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .hero-circuits--text {
+        max-width: 570px;
+        color:#101010;
+      }
+
+      .hero-circuits--text img {
+        max-width: 190px;
+      }
+
+      .hero-circuits--text h1 {
+        font-size: size(70);
+        font-weight: 400;
+        margin-bottom: 1.5rem;
+        line-height: size(46);
+        font-family: $font-title;
+        text-transform: uppercase ;
+      }
+
+      .hero-circuits--text p {
+        font-size: 18px;
+        line-height: 25px;
+      }
+
+      .hero-circuits--text strong {
+        font-weight: bold;
+      }
     }
 
-    .hero-circuits--text img {
-      margin-bottom: 2rem;
-      max-width: 190px;
-    }
-
-    .hero-circuits--text h1 {
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-      line-height: 1.3;
-    }
-
-    .hero-circuits--text p {
-      font-size: 18px;
-      line-height: 25px;
-    }
-
-    .hero-circuits--text strong {
-      font-weight: bold;
-    }
-
-    .hero-circuits--text button{
+    .hero-circuits button{
         a{
           font-size: 14px;
           color:#FEFAF6;
@@ -53,7 +67,7 @@
         }
 
         margin-top: 17px;
-        background-color: #181B4E;
+        background-color: $banner;
         width:230px;
         height:38px;
         border-radius: 8px;
@@ -61,11 +75,12 @@
     }
 
     .hero-circuits--image {
-      max-width: 50%;
+      max-width: 100%;
     }
 
     .hero-circuits--image img {
-      width: 100%;
+      width:65%;
+      padding-top: 3rem;
       height: auto;
     }
 
@@ -74,21 +89,59 @@
       .hero-circuits {
         flex-direction: column;
         text-align: left;
-        padding: 3rem 2rem;
+        padding: 3rem 2.625rem;
+        justify-content: space-around;
+        align-items: center;
       }
+      .hero-circuits--top{
+        flex-direction: column;
+        gap: 0;
 
-      .hero-circuits--text {
-        max-width: 100%;
-        margin-bottom: 2rem;
-      }
+        .hero-circuits--text {
+          max-width: 100%;
+          margin-bottom: 2rem;
+          position: relative;
+        }
+        
+        .hero-circuits--text button {
+          padding-left: 50%;
+          transform: translateY(550%);
+      
+        }
+        
 
-      .hero-circuits--image {
-        max-width: 90%;
-      }
+        .hero-circuits--text h1 {
+          font-size: size(60);
+          margin-bottom: 2rem;
+          line-height: size(56);
+          font-family: $font-title;
+          text-transform: uppercase ;
+        }
 
-      .hero-circuits--text img {
-        margin: 0 auto 1.5rem;
-      }
+        .hero-circuits--image {
+          max-width:100%;
+          display: flex;
+          justify-content: center;
+        }
+
+        .hero-circuits--image{
+          
+          
+
+          img{
+            max-width: size(208);
+            width:100%;
+            height: auto;
+            padding-top: 0;
+            margin-bottom: 2rem;
+          
+            
+          }
+        }
+
+        .hero-circuits--text img {
+          margin: 0 auto 1.5rem;
+        }
     }
-
+  }
 
