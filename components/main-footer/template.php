@@ -11,6 +11,7 @@ $config = $app->config['social-media'];
 
 $image_url_funarte = $app->view->asset('img/logo-funarte.png', false);
 $image_url_governo = $app->view->asset('img/logo-governo-federal.png', false);
+$image_url_footer = $app->view->asset('img/logo-footer.png', false);
 
 $entities = [
     'opportunities' => [
@@ -51,8 +52,8 @@ $entities = [
         </div>
 
         <div class="main-footer__content--logo-group">
+            <div class="main-footer__logo-item"><img src="<?= $image_url_footer ?>" alt="Logo Rede Mapas" style="width: 100px; height: auto;" /></div>
             <div class="main-footer__logo-item"><img src="<?= $image_url_funarte ?>" alt="Logo Funarte" /></div>
-            <div class="main-footer__logo-item"><theme-logo href="<?= $app->createUrl('site', 'index') ?>"></theme-logo></div>
             <div class="main-footer__logo-item"><img src="<?= $image_url_governo ?>" alt="Logo Governo Federal" /></div>
         </div>
         <?php $this->applyTemplateHook("main-footer-logo", "after") ?>
@@ -66,7 +67,7 @@ $entities = [
                     <?php foreach ($entities as $key => $entity): ?>
                         <li v-if="global.enabledEntities.<?= $key ?>">
                             <a href="<?= $app->createUrl('search', $key) ?>">
-                                <mc-icon name="<?= $entity['icon'] ?>"></mc-icon> <?php i::_e($entity['searchLabel']) ?>
+                                <?php i::_e($entity['searchLabel']) ?>
                             </a>
                         </li>
                     <?php endforeach; ?>

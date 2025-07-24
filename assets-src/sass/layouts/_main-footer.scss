@@ -120,56 +120,63 @@
     }
 
     &__links-wrapper {
+    width: 100%;
+    padding: size(40) 0;
+
+    .main-footer__content--links {
         width: 100%;
-        padding: size(40) 0;
+        max-width: size(1440);
+        margin: 0;
+        align-items: flex-start;
+        justify-content: space-around;
+        gap: size(40);
+        flex-wrap: wrap;
+        padding: 0 size(16);
 
-        .main-footer__content--links {
-            width: 100%;
-            max-width: size(1440);
-            margin: 0;
-            align-items: flex-start;
-            justify-content: space-around;
-            gap: size(40);
-            flex-wrap: wrap;
-            padding: 0 size(16);
+        @include mobile {
+            flex-direction: column;
+            gap: size(24);
+            align-items: center;
 
-            @include mobile {
-                flex-direction: column;
-                gap: size(24);
+            .main-footer__content--links-group {
+                max-width: 280px;
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+
+        &-group {
+            list-style: none;
+            padding: 0;
+
+            li {
+                font-weight: 400;
+                font-size: size(16);
+                line-height: size(22);
+                padding-bottom: size(16);
+
+                a {
+                    align-items: center;
+                    color: $gray-color-txt;
+                    display: flex;
+                    gap: size(13);
+                    text-decoration: none;
+                }
             }
 
-            &-group {
-                list-style: none;
-                padding: 0;
+            li:first-child {
+                font-weight: 700;
+                font-size: size(24);
+                line-height: size(28);
+                padding-bottom: size(24);
 
-                li {
-                    font-weight: 400;
-                    font-size: size(16);
-                    line-height: size(22);
-                    padding-bottom: size(16);
-
-                    a {
-                        align-items: center;
-                        color: $gray-color-txt;
-                        display: flex;
-                        gap: size(13);
-                        text-decoration: none;
-                    }
-                }
-
-                li:first-child {
-                    font-weight: 700;
-                    font-size: size(24);
-                    line-height: size(28);
-                    padding-bottom: size(24);
-
-                    a {
-                        color: $button;
-                    }
+                a {
+                    color: $button;
                 }
             }
         }
     }
+}
 
     &__content {
         margin: 0 auto;

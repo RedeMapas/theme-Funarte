@@ -1,193 +1,84 @@
-@use 'sass:color';
-
-$entities-colors: (
-  "opportunities": $opportunities-500,
-  "events": $events-500,
-  "spaces": $spaces-500,
-  "agents": $agents-500,
-  "projects": $projects-500
-);
-
-.home-entities {
-  background-color: $banner;
-  padding: 5px;
-  width: 100%;
-  padding-bottom: 2em;
+.card {
+  background: white;
+  border-radius: 16px;
   display: flex;
-  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  min-height: 200px;
 
-  &__content {
-    flex-grow: 1;
-    width: 100%;
-    max-width: 1170px;
-    padding: 0 20px;
-    margin: 0 auto;
+  &:not(:last-child) {
+    margin-bottom: 43px;
+  }
 
-    &--cards {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      position: relative;
+  &__image {
+    width: 50%;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 1rem;
 
-      .card {
-        position: relative;
-        background-color: $white;
-        width: 100%;
-        border-radius: 8px;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        padding: 20px;
-        gap: 16px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        overflow: visible !important;
-        height: auto;
+    h3 {
+      font-family: 'League Gothic', sans-serif;
+      font-size: 70px;
+      font-weight: regular;
+      color: white;
+      text-transform: uppercase;
+      margin: 0;
+    }
 
-        @each $entity, $color in $entities-colors {
-          &.#{$entity} {
-            .tag {
-              background-color: $color;
-            }
+    @media (max-width: 768px) {
+      width: 100%;
+      height: 120px;
+      border-radius: 16px 16px 0 0;
 
-            .icon {
-              color: $color;
-            }
-          }
-        }
-
-        & .tag {
-          position: absolute;
-          top: 50%;
-          left: -105px;
-          transform: translateY(-50%);
-          border-radius: 4px;
-          width: 211px;
-          height: 92px;
-          display: flex;
-          justify-content: end;
-          align-items: center;
-          z-index: 20;
-
-          &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            height: 100%;
-            background-color: inherit;
-            box-shadow: 0px 10px 0px rgba(12, 13, 39, 1);
-          }
-
-          .icon {
-            width: 47px;
-            height: 47px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 30px;
-          }
-        }
-
-        & .right {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          width: 100%;
-          margin-left: 120px;
-
-          .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-
-            h3 {
-              font-size: 1.8rem;
-              font-weight: bold;
-              color: #2C3E50;
-              margin: 0;
-            }
-
-            a {
-              text-align: left;
-              text-decoration: none;
-              color: #2980B9;
-              font-weight: bold;
-              font-size: 1.1rem;
-            }
-          }
-
-          p {
-            font-size: 1rem;
-            color: $gray-700;
-            line-height: 1.5;
-          }
-        }
-
-        @media (max-width: 1024px) {
-          & .right {
-            margin-left: 80px;
-            padding: 15px;
-          }
-          & .tag {
-            left: -90px;
-            width: 180px;
-            height: 85px;
-          }
-        }
-
-        @media (max-width: 768px) {
-
-          & .right {
-            margin-left: 0px;
-          }
-          & .tag {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 50px;
-            background-color: transparent;
-            align-items: center;
-            justify-content: center;
-
-            &::before {
-              display: none;
-            }
-
-            .icon {
-              margin: 0;
-              width: 35px;
-              height: 35px;
-              background-color: white;
-              border-radius: 50%;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            }
-          }
-        }
-
-        @media (max-width: 480px) {
-          & .right {
-            margin-left: 0px;
-          }
-          & .tag {
-            top: -5px;
-            height: 40px;
-
-            .icon {
-              width: 30px;
-              height: 30px;
-            }
-          }
-        }
+      h3 {
+        font-size: 36px;
       }
     }
+  }
+
+  &__body {
+    width: 50%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.2rem;
+
+    p {
+      font-size: 18px;
+      color: #000000;
+      line-height: 1.6;
+      margin: 0;
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
+
+    a {
+      font-family: 'League Gothic', sans-serif;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 32px;
+      text-decoration: underline;
+      color: black;
+
+      @media (max-width: 768px) {
+        font-size: 25px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 }
