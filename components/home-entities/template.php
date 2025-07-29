@@ -12,8 +12,7 @@ $entities = [
     'projects' => [
         'image' => 'img/cards/agenda_bg.png',
         'title' => 'Agenda',
-        'route' => 'search/agenda',
-        // TODO: ADICIONAR TELA DE AGENDA
+        'route' => 'search/events',
         'description' => 'Aqui você pode acompanhar as ações da Rede das Artes: apresentações artísticas, ações de pesquisa, reflexão, intercâmbios, criação, oficinas, cursos, entre outras. Uma agenda cultural que integra iniciativas artísticas de todo o Brasil.',
     ],
     'opportunities' => [
@@ -27,12 +26,6 @@ $entities = [
         'title' => 'Agentes',
         'route' => 'search/agents',
         'description' => 'Acesso a inúmeras possibilidades de conexão com a Rede das Artes. Aqui você encontra atividades com inscrições abertas, como convocatórias, oficinas, intercâmbios e residências artísticas, editais, eventos e demais oportunidades acessíveis. Você também pode criar e ofertar oportunidades para outros agentes da Rede.',
-    ],
-    'events' => [
-        'image' => 'img/cards/eventos_bg.png',
-        'title' => 'Eventos',
-        'route' => 'search/events',
-        'description' => 'Aqui você pode inscrever o seu evento e também se conectar com propostas curatoriais diversas, programações artísticas de abrangência local, interestadual e/ou internacional. São festivais, bienais, encontros, feiras, mostras, salões, fóruns que propõem apresentações artísticas, exibições públicas, ações de formação, articulação e difusão.',
     ],
     'spaces' => [
         'image' => 'img/cards/espacos_bg.png',

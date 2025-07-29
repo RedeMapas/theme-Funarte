@@ -31,15 +31,15 @@ $this->import('
             <template #default>
                 <?php $this->applyTemplateHook('mc-header-menu', 'begin') ?>
                 <!-- TODO: DESIGN PENDENTE -> Redirecionar para a nova tela de agenda -->
-                <?php $this->applyTemplateHook('mc-header-menu-home', 'before') ?>
-                <li>
-                    <?php $this->applyTemplateHook('mc-header-menu-home', 'begin') ?>
-                    <a href="<?= $app->createUrl('site', 'index') ?>" class="mc-header-menu--item home">
+                <?php $this->applyTemplateHook('mc-header-menu-events', 'before') ?>
+                <li v-if="global.enabledEntities.events">
+                    <?php $this->applyTemplateHook('mc-header-menu-events', 'begin') ?>
+                    <a href="<?= $app->createUrl('search', 'events') ?>" class="mc-header-menu--item event">
                         <p class="label"> <?php i::_e('Agenda') ?> </p>
                     </a>
-                    <?php $this->applyTemplateHook('mc-header-menu-home', 'end') ?>
+                    <?php $this->applyTemplateHook('mc-header-menu-events', 'end') ?>
                 </li>
-                <?php $this->applyTemplateHook('mc-header-menu-home', 'after') ?>
+                <?php $this->applyTemplateHook('mc-header-menu-events', 'after') ?>
 
                 <?php $this->applyTemplateHook('mc-header-menu-opportunity', 'before') ?>
                 <li v-if="global.enabledEntities.opportunities">
@@ -69,15 +69,6 @@ $this->import('
                     <?php $this->applyTemplateHook('mc-header-menu-spaces', 'end') ?>
                 </li>
                 <?php $this->applyTemplateHook('mc-header-menu-spaces', 'after') ?>
-                <?php $this->applyTemplateHook('mc-header-menu-events', 'before') ?>
-                <li v-if="global.enabledEntities.events">
-                    <?php $this->applyTemplateHook('mc-header-menu-events', 'begin') ?>
-                    <a href="<?= $app->createUrl('search', 'events') ?>" class="mc-header-menu--item event">
-                        <p class="label"> <?php i::_e('Eventos') ?> </p>
-                    </a>
-                    <?php $this->applyTemplateHook('mc-header-menu-events', 'end') ?>
-                </li>
-                <?php $this->applyTemplateHook('mc-header-menu-events', 'after') ?>
                 <!-- TODO: DESIGN PENDENTE -> Redirecionar para a nova tela de circuitos -->
                 <?php $this->applyTemplateHook('mc-header-menu-spaces', 'before') ?>
                 <li v-if="global.enabledEntities.spaces">

@@ -17,9 +17,6 @@ $circuits_url = $app->view->asset('img/home/home-circuits/circuits.gif', false);
 $circuits_brasil_url = $app->view->asset('img/home/home-circuits/artBrasil.png', false);
 ?>
 
-<div class="custom-background">
-    <div class="divider-line"></div>
-</div>
 <section class="hero-circuits">
     <div class="hero-circuits--top">
         <div class="hero-circuits--text">
@@ -37,6 +34,3 @@ $circuits_brasil_url = $app->view->asset('img/home/home-circuits/artBrasil.png',
         <a href="<?= $app->createUrl("search","events")?>">Ver Circuitos Artísticos</a>
     </button>
 </section>
-<div class="custom-background">
-    <div class="divider-line"></div>
-</div>

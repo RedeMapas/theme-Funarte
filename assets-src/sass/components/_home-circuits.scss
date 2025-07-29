@@ -19,7 +19,6 @@
       min-height: 466px;
       background-color: $white;
       max-width: size(1170);
-      padding-left: size(25);
       margin: 0 auto;
       gap:0 12rem;
     }
@@ -89,7 +88,7 @@
       .hero-circuits {
         flex-direction: column;
         text-align: left;
-        padding: 3rem 2.625rem;
+        padding: 60px 16px;
         justify-content: space-around;
         align-items: center;
       }

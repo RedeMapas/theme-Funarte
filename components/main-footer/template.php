@@ -129,6 +129,8 @@ $entities = [
         <p>
             <strong><?php i::_e('Versão Beta') ?></strong>
             <?php i::_e('Você está em uma versão de teste da plataforma. Se encontrar qualquer divergência ou tiver dúvidas, entre em contato com o suporte.') ?>
+            <br/>
+            <?php i::_e('Desenvolvido por Laboratório do Futuro da Universidade Federal do Ceará.') ?>
         </p>
     </div>
 </div>
