@@ -26,7 +26,7 @@ $entities = [
         'image' => 'img/cards/agentes_bg.png',
         'title' => 'Agentes',
         'route' => 'search/agents',
-        'description' => 'Acesso a inúmeras possibilidades de conexão com a Rede das Artes. Aqui você encontra atividades com inscrições abertas, como convocatórias, oficinas, intercâmbios e residências artísticas, editais, eventos e demais oportunidades acessíveis. Você também pode criar e ofertar oportunidades para outros agentes da Rede.',
+        'description' => 'Conheça artistas, grupos, coletivos e outros agentes artísticos cadastrados na Plataforma Rede das Artes. Aqui você conhece os participantes da Rede das Artes e pode se inscrever para fazer parte. São agentes das artes, realizadores de festivais, grupos e coletivos de artes visuais, circo, dança, música, teatro e artes integradas.',
     ],
     'events' => [
         'image' => 'img/cards/eventos_bg.png',
