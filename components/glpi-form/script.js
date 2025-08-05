@@ -16,6 +16,8 @@ app.component('glpi-form', {
             statusType: 'success',
             formMessage: '',
             formMessageType: 'success',
+            recaptchaResponse: '',
+            error: false,
             formData: {
                 nome: '',
                 email: '',
@@ -135,6 +137,37 @@ app.component('glpi-form', {
             this.formData.telefone = formatted;
         },
 
+        async verifyCaptcha(response) {
+            this.recaptchaResponse = response;
+        },
+
+        expiredCaptcha() {
+            this.recaptchaResponse = '';
+            this.error = false; // Reseta o erro para que o mc-captcha consiga processar o erro seguinte
+        },
+
+        // Verificar captcha com o backend antes de enviar
+        async verifyCaptchaWithBackend() {
+            if (!this.recaptchaResponse) {
+                return { success: false, error: 'Captcha não fornecido' };
+            }
+
+            try {
+                const formData = new FormData();
+                formData.append('g-recaptcha-response', this.recaptchaResponse);
+
+                const response = await fetch($MAPAS.baseURL + 'site/valida-captcha', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                return { success: false, error: 'Erro ao verificar captcha' };
+            }
+        },
+
         validateForm() {
             // Basic validation for required fields
             if (!this.formData.nome || !this.formData.email || !this.formData.mensagem) {
@@ -158,6 +191,13 @@ app.component('glpi-form', {
                 }
             }
 
+            // Captcha validation
+            if (!this.recaptchaResponse || this.recaptchaResponse === '' || this.recaptchaResponse === null) {
+                this.showFormMessage('Por favor, preencha o CAPTCHA.', true);
+                this.error = true;
+                return false;
+            }
+
             return true;
         },
 
@@ -169,6 +209,15 @@ app.component('glpi-form', {
             this.isSubmitting = true;
 
             try {
+                // Verificar captcha com o backend primeiro
+                const captchaValid = await this.verifyCaptchaWithBackend();
+                if (!captchaValid.success) {
+                    this.showFormMessage(captchaValid.error, true);
+                    this.error = true;
+                    this.isSubmitting = false;
+                    return;
+                }
+
                 const currentDomain = window.location.hostname;
                 const timestamp = new Date().toISOString();
                 const source = window.location.href;
@@ -184,6 +233,7 @@ app.component('glpi-form', {
                 formData.append('mensagem', mensagemCompleta);
                 formData.append('timestamp', timestamp);
                 formData.append('source', source);
+                formData.append('g-recaptcha-response', this.recaptchaResponse);
 
                 let urlGlpi = 'http://localhost4242/index_old.php'; // Default URL for local testing
 
@@ -216,6 +266,10 @@ app.component('glpi-form', {
                     telefone: '',
                     mensagem: ''
                 };
+
+                // Reset captcha
+                this.recaptchaResponse = '';
+                this.error = false;
 
                 // Close curtain after a delay
                 setTimeout(() => {

@@ -7,10 +7,7 @@
 
 use MapasCulturais\i;
 
-$this->import('
-    mc-link
-    mc-icon
-');
+$this->import('mc-captcha');
 
 ?>
 
@@ -81,6 +78,15 @@ $this->import('
           autocomplete="off"
           required
         ></textarea>
+        
+        <!-- Captcha -->
+        <mc-captcha 
+          @captcha-verified="verifyCaptcha" 
+          @captcha-expired="expiredCaptcha"
+          :error="error"
+          class="help-form-captcha"
+        ></mc-captcha>
+        
         <button type="submit" class="help-form-button" :disabled="isSubmitting">
           {{ isSubmitting ? 'Enviando...' : 'Enviar mensagem' }}
         </button>

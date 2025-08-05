@@ -186,6 +186,12 @@
   min-height: 80px;
 }
 
+.help-form-captcha {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0;
+}
+
 .help-form-button {
   background-color: #007bff;
   color: white;
