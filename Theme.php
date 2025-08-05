@@ -53,5 +53,25 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
                 }
             }
         });
+
+        /**
+         * Validação do Captcha
+         */
+        $app->hook('POST(site.valida-captcha)', function() use($app) {
+            $recaptcha_response = $_POST['g-recaptcha-response'] ?? '';
+            
+            if (empty($recaptcha_response)) {
+                $this->json(['success' => false, 'error' => 'Captcha não fornecido. Tente novamente.']);
+                return;
+            }
+
+            // Usar a verificação nativa do App.php
+            if (!$app->verifyCaptcha($recaptcha_response)) {
+                $this->json(['success' => false, 'error' => 'Captcha inválido. Tente novamente.']);
+                return;
+            }
+
+            $this->json(['success' => true, 'message' => 'Captcha válido']);
+        });
     }
 }
