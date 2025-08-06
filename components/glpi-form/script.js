@@ -235,7 +235,7 @@ app.component('glpi-form', {
                 formData.append('source', source);
                 formData.append('g-recaptcha-response', this.recaptchaResponse);
 
-                let urlGlpi = 'http://localhost4242/index_old.php'; // Default URL for local testing
+                let urlGlpi = 'http://localhost:4242/index_old.php'; // Default URL for local testing
 
                 // Choose the urlGlpi based on the detected domain using regular expressions
                 if (/cultura.gov.br$/.test(currentDomain)) {
