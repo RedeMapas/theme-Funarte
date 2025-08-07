@@ -40,9 +40,10 @@
         &--title{
             font-size: size(70);
             text-align: center;
-            line-height: size(62);
+            line-height: size(75);
             font-family: $font-title;
             text-transform: uppercase;
+            margin: 0 auto;
         }
         a{
             padding: size(16) size(8)!important;

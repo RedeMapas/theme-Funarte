@@ -18,7 +18,6 @@ $logos_url = $app->view->asset('img/home/home-main-header/logos.png', false);
 
       <p>
         Faça parte da Rede das Artes!<br>
-        Uma plataforma onde as artes do Brasil podem se ver e ser vistas
       </p>
 
       <img src="<?= $logos_url ?>" alt="Logos em tons de branco" />
