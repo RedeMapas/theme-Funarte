@@ -26,7 +26,7 @@ $banner_right_url = $app->view->asset('img/home/home-register/banner-right.png',
         <p class="home-register__content--description"><?= $this->text('description', i::__('Cadastre seu portfólio, divulgue suas ações, acompanhe a agenda do seu território, conecte-se com outros agentes e fortaleça a Rede das Artes do Brasil.')); ?>
         </p>
         <a href="<?= $app->createUrl('autenticacao', 'register') ?>" class="button button--primary button--large button--icon">
-            <?= i::__('Fazer Cadastro')?>
+            <?= i::__('Faça seu cadastro')?>
         </a>
     </div>
     <img src="<?= $banner_right_url ?>" alt="Adorno direito" class="decoration banner-right" />
