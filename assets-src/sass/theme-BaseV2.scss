@@ -99,3 +99,8 @@ $border-radius-xxs: 2px;
 :root{
     --mc-font-title: #{$font-title};
 }
+
+.controller-search.action-events form .verified,
+.controller-search.action-agents .form > div:nth-child(1) {
+    display: none;
+}
