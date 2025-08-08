@@ -31,5 +31,15 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         $app->hook('template(<<*>>.<<*>>.body):after', function(){
             $this->part('glpi--script');
         });
+
+        $app->hook('POST(auth.login)', function () use ($app) {
+            if ($app->user && $app->user->isAuthenticated()) {
+                $agent = $app->user->getAgent();
+                if ($agent && $agent->getMetadata('isFunarte') !== true) {
+                    $agent->setMetadata('isFunarte', true);
+                    $agent->save();
+                }
+            }
+        });
     }
 }
