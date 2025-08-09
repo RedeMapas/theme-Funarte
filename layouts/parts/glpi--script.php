@@ -50,6 +50,116 @@
     pointer-events: none;
   }
 
+
+  .help-popup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .help-popup.help-popup-open {
+    transform: translateY(0);
+  }
+
+  .help-popup-content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 90%;
+    max-width: 350px;
+    background-color: #ffffff;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.3);
+    padding: 24px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .help-popup-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+
+  .help-popup-close:hover {
+    background-color: #f8f9fa;
+    color: #333;
+  }
+
+  .help-popup-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 20px 0;
+    text-align: center;
+  }
+
+  .help-popup-divider {
+    height: 1px;
+    background-color: #e9ecef;
+    margin: 20px 0;
+  }
+
+  .help-popup-text {
+    font-size: 16px;
+    color: #333;
+    margin: 20px 0;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .help-popup-button {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .help-popup-button-primary {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .help-popup-button-primary:hover {
+    background-color: #0056b3;
+  }
+
+  .help-popup-button-secondary {
+    background-color: white;
+    color: #007bff;
+    border: 1px solid #007bff;
+  }
+
+  .help-popup-button-secondary:hover {
+    background-color: #f8f9fa;
+  }
+
   /* Help curtain container */
   .help-curtain {
     position: fixed;
@@ -207,6 +317,31 @@
   Precisa de ajuda?
 </div>
 
+<!-- help popup container -->
+<div id="helpPopup" class="help-popup">
+  <div class="help-popup-content">
+    <button id="helpPopupClose" class="help-popup-close">&times;</button>
+    
+    <h2 class="help-popup-title">Precisa de ajuda?</h2>
+    
+    <div class="help-popup-divider"></div>
+    
+    <p class="help-popup-text">Quer entender melhor como utilizar os recursos e as configurações dessa página?</p>
+    
+    <a href="https://redemapas.github.io/manual/" target="_blank" class="help-popup-button help-popup-button-primary">
+      Acesse o Manual
+    </a>
+    
+    <div class="help-popup-divider"></div>
+    
+    <p class="help-popup-text">Ainda ficou com dúvida?</p>
+    
+    <button id="helpPopupContactButton" class="help-popup-button help-popup-button-secondary">
+      Fale com nosso time
+    </button>
+  </div>
+</div>
+
 <!-- Help curtain container -->
 <div id="helpCurtain" class="help-curtain">
   <div class="help-form-panel">
@@ -261,6 +396,9 @@
 <script>
   // Get DOM element references
   const helpFooterTag = document.getElementById('helpFooterTag');
+  const helpPopup = document.getElementById('helpPopup');
+  const helpPopupClose = document.getElementById('helpPopupClose');
+  const helpPopupContactButton = document.getElementById('helpPopupContactButton');
   const helpCurtain = document.getElementById('helpCurtain');
   const helpFormClose = document.getElementById('helpFormClose');
   const helpForm = document.getElementById('helpForm');
@@ -268,8 +406,41 @@
   const helpFormMessage = document.getElementById('helpFormMessage');
   const helpTelefoneInput = document.getElementById('helpTelefone');
 
-  // Open curtain when footer tag is clicked
+  // Open popup 
   helpFooterTag.addEventListener('click', () => {
+    helpPopup.classList.add('help-popup-open');
+    helpFooterTag.classList.add('help-footer-tag-hidden'); // Hide footer tag
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
+  });
+
+  // Close popup when close button is clicked
+  helpPopupClose.addEventListener('click', () => {
+    closePopup();
+  });
+
+  // Close popup when clicking outside 
+  helpPopup.addEventListener('click', (event) => {
+    if (event.target === helpPopup) {
+      closePopup();
+    }
+  });
+
+  // Close popup with ESC 
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && helpPopup.classList.contains('help-popup-open')) {
+      closePopup();
+    }
+  });
+
+  function closePopup() {
+    helpPopup.classList.remove('help-popup-open');
+    helpFooterTag.classList.remove('help-footer-tag-hidden'); // Show footer tag
+    document.body.style.overflow = ''; // Restore background scroll
+  }
+
+  // Open curtain 
+  helpPopupContactButton.addEventListener('click', () => {
+    closePopup(); // Close the popup first
     helpCurtain.classList.add('help-curtain-open');
     helpFooterTag.classList.add('help-footer-tag-hidden'); // Hide footer tag
     document.body.style.overflow = 'hidden'; // Prevent background scroll
@@ -281,21 +452,20 @@
     closeCurtain();
   });
 
-  // Close curtain when clicking outside the form panel
+  // Close curtain when clicking outside 
   helpCurtain.addEventListener('click', (event) => {
     if (event.target === helpCurtain) {
       closeCurtain();
     }
   });
 
-  // Close curtain with ESC key
+  // Close curtain with ESC 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && helpCurtain.classList.contains('help-curtain-open')) {
       closeCurtain();
     }
   });
 
-  // Function to close curtain
   function closeCurtain() {
     helpCurtain.classList.remove('help-curtain-open');
     helpFooterTag.classList.remove('help-footer-tag-hidden'); // Show footer tag
