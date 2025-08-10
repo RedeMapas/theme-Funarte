@@ -25,7 +25,7 @@
     bottom: 0;
     right: 0;
     transform: translateX(-50%);
-    background-color: #007bff;
+    background-color: #181b4e;
     color: white;
     padding: 6px 24px;
     border-radius: 8px 8px 0 0;
@@ -39,7 +39,6 @@
   }
 
   .help-footer-tag:hover {
-    background-color: #0056b3;
     transform: translateX(-50%) translateY(-2px);
     box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
   }
@@ -105,24 +104,24 @@
   }
 
   .help-popup-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
-    margin: 0 0 20px 0;
-    text-align: center;
+    font-size: 22px;
+    color: #181b4e;
+    margin: 0 0 17px 0;
+    text-align: start;
   }
 
   .help-popup-divider {
-    height: 1px;
-    background-color: #e9ecef;
+    height: 2px;
+    background-color: #cccccc;
     margin: 20px 0;
   }
 
   .help-popup-text {
     font-size: 16px;
+    font-weight: bold;
     color: #333;
-    margin: 20px 0;
-    text-align: center;
+    margin: 20px 0 10px 0;
+    text-align: start;
     line-height: 1.5;
   }
 
@@ -139,26 +138,30 @@
     text-decoration: none;
     text-align: center;
     margin: 10px 0;
+    border-radius: 8px;
   }
 
   .help-popup-button-primary {
-    background-color: #007bff;
+    background-color: #181b4e;
     color: white;
   }
 
-  .help-popup-button-primary:hover {
-    background-color: #0056b3;
-  }
+  /* .help-popup-button-primary:hover {
+    background-color: #13153e;
+  } */
 
   .help-popup-button-secondary {
     background-color: white;
-    color: #007bff;
-    border: 1px solid #007bff;
+    color: #181b4e;
+    border: 1px solid #181b4e;
+    padding: 8px 16px !important;
+    width: auto !important;
+    font-size: 13px;
   }
 
-  .help-popup-button-secondary:hover {
+  /* .help-popup-button-secondary:hover {
     background-color: #f8f9fa;
-  }
+  } */
 
   /* Help curtain container */
   .help-curtain {
@@ -205,8 +208,8 @@
 
   .help-form-title {
     font-size: 20px;
-    font-weight: 600;
-    color: #333;
+    font-weight: bold;
+    color: #181b4e;
     margin: 0;
   }
 
@@ -274,7 +277,7 @@
   .help-form-input:focus,
   .help-form-textarea:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: #181b4e;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
   }
 
@@ -284,7 +287,7 @@
   }
 
   .help-form-button {
-    background-color: #007bff;
+    background-color: #181b4e;
     color: white;
     border: none;
     padding: 12px 20px;
@@ -295,9 +298,9 @@
     transition: background-color 0.2s ease;
   }
 
-  .help-form-button:hover {
-    background-color: #0056b3;
-  }
+  /* .help-form-button:hover {
+    background-color: #13153e;
+  } */
 
   .help-form-button:disabled {
     background-color: #6c757d;
@@ -337,7 +340,7 @@
     <p class="help-popup-text">Ainda ficou com dúvida?</p>
     
     <button id="helpPopupContactButton" class="help-popup-button help-popup-button-secondary">
-      Fale com nosso time
+      Fale com o nosso time
     </button>
   </div>
 </div>
