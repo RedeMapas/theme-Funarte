@@ -1,5 +1,9 @@
 app.component('home-prosas-notices', {
-    template: $TEMPLATES['home-prosas-notices'],
+    template: `
+        <div v-show="isReady">
+            ${$TEMPLATES['home-prosas-notices']}
+        </div>
+    `,
 
     mounted() {
         const script = document.createElement('script');
@@ -8,6 +12,7 @@ app.component('home-prosas-notices', {
         document.body.appendChild(script);
 
         const replaceShadowLabel = () => {
+            let changed = false;
             const components = document.querySelectorAll('prosas-listagem-editais');
 
             components.forEach(el => {
@@ -17,10 +22,16 @@ app.component('home-prosas-notices', {
                     paragraphs.forEach(p => {
                         if (p.textContent.trim() === 'Desenvolvido por') {
                             p.textContent = 'Seção exibida por';
+                            changed = true;
                         }
                     });
                 }
             });
+
+            if (changed) {
+                this.isReady = true;
+                observer.disconnect();
+            }
         };
 
         const observer = new MutationObserver(() => replaceShadowLabel());
@@ -29,15 +40,19 @@ app.component('home-prosas-notices', {
         const timeoutId = setTimeout(() => replaceShadowLabel(), 1000);
 
         setTimeout(() => {
+            if (!this.isReady) {
+                this.isReady = true;
+            }
             observer.disconnect();
             clearTimeout(timeoutId);
-        }, 5000);
+        }, 8000);
     },
 
-    setup(props) {
+    setup() {
         const text = Utils.getTexts('home-prosas-notices');
         const global = useGlobalState();
-        return { text, global };
+        const isReady = Vue.ref(false);
+        return { text, global, isReady };
     },
 
     props: {
