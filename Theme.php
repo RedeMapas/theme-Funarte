@@ -22,9 +22,19 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
             $this->part('google-analytics--script');
             $this->part('clarity--script');
         });
-        $app->hook("ApiQuery(<<project|opportunity|event|space|agent|seal>>).params", function(&$api_params) use($app) {
+
+        $app->hook("ApiQuery(<<project|opportunity|event|space|seal>>).params", function(&$api_params) use($app) {
             if($subsite = $app->subsite){
                 $api_params['_subsiteId'] = API::EQ($subsite->id);
+            }
+        });
+
+        $app->hook("ApiQuery(agent).params", function(&$api_params) use($app) {
+            $path = $app->request->getPathInfo();
+            if(strpos($path, '/agentes') !== false || strpos($path, '/agents') !== false) {
+                if($subsite = $app->subsite){
+                    $api_params['_subsiteId'] = API::EQ($subsite->id);
+                }
             }
         });
 
