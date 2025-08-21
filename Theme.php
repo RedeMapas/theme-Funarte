@@ -38,7 +38,6 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
             $this->part('clarity--script');
         });
 
-
         $app->hook('template(<<*>>.<<*>>.body):after', function(){
             $this->part('glpi--script');
         });
@@ -50,6 +49,24 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
                     $agent->setMetadata('isFunarte', true);
                     $agent->save();
                 }
+            }
+        });
+
+        /**
+         * Add custom navigation items to panel
+         */
+        $app->hook("panel.nav", function (&$nav_items) use ($app) {
+            if (isset($nav_items["more"])) {
+                $i = $nav_items["more"]["items"];
+                // Use PHP array spread operator to prepend new item, then all previous items
+                $nav_items["more"]["items"] = [
+                    [
+                        "route" => "search/projects",
+                        "icon" => "project",
+                        "label" => "Listar Iniciativas",
+                    ],
+                    ...$i
+                ];
             }
         });
     }
