@@ -39,8 +39,9 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         });
 
 
-        $app->hook('template(<<*>>.<<*>>.body):after', function(){
-            $this->part('glpi--script');
+        $app->hook('template(<<*>>.<<*>>.body):begin', function(){
+            /** @var \MapasCulturais\Theme $this */
+            $this->part('glpi-form');
         });
 
         $app->hook('POST(auth.login)', function () use ($app) {
@@ -51,6 +52,26 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
                     $agent->save();
                 }
             }
+        });
+
+        /**
+         * Validação do Captcha
+         */
+        $app->hook('POST(site.valida-captcha)', function() use($app) {
+            $recaptcha_response = $_POST['g-recaptcha-response'] ?? '';
+            
+            if (empty($recaptcha_response)) {
+                $this->json(['success' => false, 'error' => 'Captcha não fornecido. Tente novamente.']);
+                return;
+            }
+
+            // Usar a verificação nativa do App.php
+            if (!$app->verifyCaptcha($recaptcha_response)) {
+                $this->json(['success' => false, 'error' => 'Captcha inválido. Tente novamente.']);
+                return;
+            }
+
+            $this->json(['success' => true, 'message' => 'Captcha válido']);
         });
     }
 }

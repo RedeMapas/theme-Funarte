@@ -1,0 +1,219 @@
+// GLPI Form Component Styles
+
+/* Container principal - esconde o conteúdo inline */
+.glpi-form-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Status message styling */
+.help-status-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 4px;
+  pointer-events: auto;
+}
+
+.help-status-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 4px;
+  pointer-events: auto;
+}
+
+/* Help footer tag styling */
+.help-footer-tag {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  transform: translateX(-50%);
+  background-color: #007bff;
+  color: white;
+  padding: 6px 24px;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  user-select: none;
+  pointer-events: auto;
+}
+
+.help-footer-tag:hover {
+  background-color: #0056b3;
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.help-footer-tag.help-footer-tag-hidden {
+  transform: translateX(-50%) translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Help curtain container */
+.help-curtain {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: auto;
+}
+
+.help-curtain.help-curtain-open {
+  transform: translateY(0);
+}
+
+/* Help form panel */
+.help-form-panel {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 90%;
+  max-width: 350px;
+  background-color: #ffffff;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.3);
+  padding: 24px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Help form header */
+.help-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.help-form-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.help-form-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #aaa;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.help-form-close:hover {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Help form message area for validation feedback */
+.help-form-message {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  display: none;
+}
+
+.help-form-message.help-form-message-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  display: block;
+}
+
+.help-form-message.help-form-message-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  display: block;
+}
+
+/* Help form styling */
+.help-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.help-form-input,
+.help-form-textarea {
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+}
+
+.help-form-input:focus,
+.help-form-textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.help-form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.help-form-captcha {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0;
+}
+
+.help-form-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.help-form-button:hover {
+  background-color: #0056b3;
+}
+
+.help-form-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Status message container */
+.help-status-container {
+  margin: 20px;
+}
