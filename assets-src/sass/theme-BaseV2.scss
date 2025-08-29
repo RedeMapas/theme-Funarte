@@ -28,7 +28,7 @@ $secondary-500: #9eca80 !default;
 
 // Entities colors
 $opportunities-500: #c40c0c;
-$events-500: #008D38;
+$events-500: #117C83;
 $spaces-500: #F0B500;
 $agents-500: #E0720B;
 $projects-500: #D47991;
@@ -52,7 +52,7 @@ $home-register: #036293;
 $low-500: #2a327f;
 // $high-500: #FFFFFF;
 
-//FONTS 
+//FONTS
 
 $font-title: 'League Gothic', sans-serif !default;
 // // FONTS
@@ -103,4 +103,37 @@ $border-radius-xxs: 2px;
 .controller-search.action-events form .verified,
 .controller-search.action-agents .form > div:nth-child(1) {
     display: none;
+}
+
+// melhorias na pagina de eventos na secao de ocorrencias
+.entity-occurrence-list__occurrences .occurrence__card .content__ticket .ticket {
+    font-weight: 900;
+    font-size: 16px;
+}
+
+.entity-occurrence-list__occurrences .occurrence__card .header__title .space__color {
+    color: $primary-500
+}
+
+.entity-occurrence-list__occurrences .occurrence__card .header {
+    width: 100%;
+}
+.entity-occurrence-list__occurrences .occurrence__card .header__title {
+    width: 100%;
+    font-weight: 999;
+}
+
+.entity-occurrence-list__occurrences .occurrence__card .header__link {
+    display: inline-block;
+    width: 20%;
+    margin-top: -35px;
+}
+
+.entity-occurrence-list__occurrences .occurrence__card .address {
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+.entity-occurrence-list__occurrences .occurrence__card .content__price--value .value{
+    font-weight: 999;
+    font-size: 16px;
 }
