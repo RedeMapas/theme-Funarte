@@ -35,7 +35,9 @@ $this->import('
 
     <div class="entity-card__content">
         <div class="entity-card__content--occurrence-data">
-            <mc-icon name="event"></mc-icon> {{occurrence.starts.date('long')}} <?= i::_e('às') ?> {{occurrence.starts.time()}}
+            <mc-icon name="event"></mc-icon> {{occurrence.starts.date('long')}} <?= i::_e(
+                "às",
+            ) ?> {{occurrence.starts.time()}}
         </div>
         <div v-if="!hideSpace" class="entity-card__content--occurrence-space">
             <div class="link"><mc-icon class="link space__color" name="pin"></mc-icon></div>
@@ -49,12 +51,16 @@ $this->import('
         </div>
         <div class="entity-card__content--occurrence-info">
             <div class="ageRating">
-                <span class="ageRating__class uppercase"><?= i::__('Classificação') ?><strong>: </strong></span>
+                <span class="ageRating__class uppercase"><?= i::__(
+                    "Classificação",
+                ) ?><strong>: </strong></span>
 
                 <span class="ageRating__value uppercase">{{event.classificacaoEtaria}}</span>
             </div>
             <div v-if="occurrence.price" class="price ageRating">
-                <span class="ageRating__class"><?= i::__('Entrada') ?><strong>: </strong></span>
+                <span class="ageRating__class"><?= i::__(
+                    "Entrada",
+                ) ?><strong>: </strong></span>
 
                 <span class="ageRating__value">{{occurrence.price}}</span>
             </div>
@@ -62,13 +68,15 @@ $this->import('
         <div class="entity-card__content--terms">
             <div v-if="tags" class="entity-card__content--terms-tag">
                 <label class="tag__title">
-                    <?php i::_e('Tags:') ?> ({{event.terms.tag.length}}):
+                    <?php i::_e("Tags:"); ?> ({{event.terms.tag.length}}):
                 </label>
                 <p :class="['terms', 'event__color']"> {{tags}} </p>
             </div>
             <div v-if="linguagens" class="entity-card__content--terms-linguagem">
                 <label class="linguagem__title">
-                    <?php i::_e('linguagens:') ?> ({{event.terms.linguagem.length}}):
+                    <?php i::_e(
+                        "linguagens:",
+                    ); ?> ({{event.terms.linguagem.length}}):
                 </label>
                 <p :class="['terms', 'event__color']"> {{linguagens}} </p>
             </div>
@@ -78,14 +86,14 @@ $this->import('
         <div class="entity-card__footer--info">
             <div v-if="seals" class="seals">
                 <label class="seals__title">
-                    <?php i::_e('Selos') ?>:
+                    <?php i::_e("Selos"); ?>:
                 </label>
                 <mc-avatar v-for="seal in seals" class="seals__seal" :title="seal.name" :entity="seal" square size="xsmall"></mc-avatar>
             </div>
         </div>
         <div class="entity-card__footer--action">
             <a :href="event.singleUrl" class="button button--primary button--large button--icon">
-                <?php i::_e('Acessar') ?>
+                <?php i::_e("Acessar"); ?>
                 <mc-icon name="access"></mc-icon>
             </a>
         </div>
