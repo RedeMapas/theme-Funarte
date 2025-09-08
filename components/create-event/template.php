@@ -1,0 +1,68 @@
+<?php
+/**
+ * @var MapasCulturais\App $app
+ * @var MapasCulturais\Themes\BaseV2\Theme $this
+ */
+
+use MapasCulturais\i;
+
+$this->import('
+    entity-occurrence-list
+    entity-field 
+    entity-terms
+    mc-link
+    mc-modal 
+    create-occurrence
+');
+?>
+<mc-modal :title="modalTitle" classes="create-modal create-event-modal" button-label="<?php i::_e('Criar Evento')?>"  @open="createEntity()" @close="destroyEntity()">
+     <template v-if="entity && !entity.id" #default>
+         <label id="title"><?php i::_e('Crie um evento com informações básicas') ?><br><?php i::_e('e de forma rápida') ?></label>
+         <div class="create-modal__fields">
+             <entity-field :entity="entity" hide-required label=<?php i::esc_attr_e("Nome ou título") ?> prop="name"></entity-field>
+             <entity-terms :entity="entity" hide-required :editable="true" :classes="linguagemClasses" taxonomy='linguagem' title="<?php i::esc_attr_e("Linguagem cultural") ?>"></entity-terms>
+             <entity-field :entity="entity" hide-required prop="shortDescription" :max-length="400" label="<?php i::esc_attr_e("Adicione uma Descrição curta para o Evento") ?>"></entity-field>
+             <entity-field :entity="entity" hide-required v-for="field in fields" :prop="field"></entity-field>
+         </div>
+     </template>
+
+     <template v-if="entity?.id" #default>
+        <div>
+            <label><?php i::_e('É possível adicionar outras ocorrências para seu evento. Deseja inserir agora?'); ?> </label><br><br>
+            <!-- <label><?php i::_e('Para completar e publicar seu novo evento, acesse a área <b>Rascunhos</b> em <b>Meus Eventos</b> no <b>Painel de Controle</b>.  ');?></label> -->
+        </div>
+        <!-- <hr><br> -->
+         <!-- <entity-occurrence-list :entity="entity" editable create-event></entity-occurrence-list> -->
+         <create-occurrence :entity="entity" @create="addToOccurrenceList($event)"></create-occurrence>
+     </template>
+
+     <template #button="modal">
+         <slot :modal="modal"></slot>
+     </template>
+
+     <template v-if="!entity?.id" #actions="modal">
+         <button href="#title" class="button button--primary" @click="createPublic(modal)"><?php i::_e('Criar e Publicar') ?></button>
+         <button href="#title" class="button button--solid-dark" @click="createDraft(modal)"><?php i::_e('Criar em Rascunho') ?></button>
+         <button class="button button--text button--text-del " @click="modal.close()"><?php i::_e('Cancelar') ?></button>
+     </template>
+    <template v-if="entity?.id && entity.status==1" #actions="modal">
+        <div style="display: flex; justify-content: flex-start; gap: 8px; width: 100%;">
+            <mc-link :entity="entity" class="button button--primary-outline button--icon">
+            <?php i::_e('Ver Evento');?>
+            </mc-link>
+            <mc-link :entity="entity" route="edit" class="button button--primary button--icon">
+            <?php i::_e('Completar Informações')?>
+            </mc-link>
+        </div>
+    </template>
+    <template v-if="entity?.id && entity.status==0" #actions="modal">
+        <div style="display: flex; justify-content: flex-start; gap: 8px; width: 100%;">
+            <a href="/meus-eventos/#draft" class="button button--primary-outline button--icon">
+            <?php i::_e('Ver Rascunhos');?>
+            </a>
+            <mc-link :entity="entity" route="edit" class="button button--primary button--icon">
+            <?php i::_e('Completar Informações')?>
+            </mc-link>
+        </div>
+    </template>
+ </mc-modal>
