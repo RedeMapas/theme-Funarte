@@ -10,7 +10,8 @@ app.component('glpi-form', {
 
     data() {
         return {
-            isCurtainOpen: false,
+            isFormCurtainOpen: false,
+            isOptionsCurtainOpen: false,
             isSubmitting: false,
             statusMessage: '',
             statusType: 'success',
@@ -40,10 +41,11 @@ app.component('glpi-form', {
 
     methods: {
         setupEventListeners() {
-            // Close curtain with ESC key
+            // Close curtains with ESC key
             document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && this.isCurtainOpen) {
-                    this.closeCurtain();
+                if (event.key === 'Escape') {
+                    if (this.isFormCurtainOpen) this.closeFormCurtain();
+                    if (this.isOptionsCurtainOpen) this.closeOptionsCurtain();
                 }
             });
 
@@ -73,21 +75,34 @@ app.component('glpi-form', {
             });
         },
 
-        openCurtain() {
-            this.isCurtainOpen = true;
+        openOptionsCurtain() {
+            this.isOptionsCurtainOpen = true;
             document.body.style.overflow = 'hidden';
             this.clearFormMessage();
         },
 
-        closeCurtain() {
-            this.isCurtainOpen = false;
+        closeOptionsCurtain() {
+            this.isOptionsCurtainOpen = false;
+            document.body.style.overflow = '';
+            this.clearFormMessage();
+        },
+
+        openFormCurtain() {
+            this.isOptionsCurtainOpen = false;
+            this.isFormCurtainOpen = true;
+            document.body.style.overflow = 'hidden';
+            this.clearFormMessage();
+        },
+
+        closeFormCurtain() {
+            this.isFormCurtainOpen = false;
             document.body.style.overflow = '';
             this.clearFormMessage();
         },
 
         handleCurtainClick(event) {
             if (event.target.classList.contains('help-curtain')) {
-                this.closeCurtain();
+                this.closeFormCurtain();
             }
         },
 
@@ -273,7 +288,7 @@ app.component('glpi-form', {
 
                 // Close curtain after a delay
                 setTimeout(() => {
-                    this.closeCurtain();
+                    this.closeFormCurtain();
                 }, 5000);
 
             } catch (error) {

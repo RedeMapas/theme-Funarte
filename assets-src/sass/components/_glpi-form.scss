@@ -38,7 +38,7 @@
   bottom: 0;
   right: 0;
   transform: translateX(-50%);
-  background-color: #007bff;
+  background-color: #181b4e;
   color: white;
   padding: 6px 24px;
   border-radius: 8px 8px 0 0;
@@ -53,7 +53,6 @@
 }
 
 .help-footer-tag:hover {
-  background-color: #0056b3;
   transform: translateX(-50%) translateY(-2px);
   box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -64,8 +63,115 @@
   pointer-events: none;
 }
 
-/* Help curtain container */
-.help-curtain {
+/* Help form header */
+.help-curtain-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #bbbbbb;
+}
+
+.help-curtain-close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #aaa;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.help-curtain-close-button:hover {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.help-options-curtain {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(100%);
+  pointer-events: auto;
+}
+
+.help-options-curtain.help-options-open {
+  transform: translateY(0);
+}
+
+.help-options-content {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 90%;
+  max-width: 350px;
+  background-color: #ffffff;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.3);
+  padding: 24px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.help-options-title {
+  font-size: 22px;
+  color: #181b4e;
+  margin: 0 0 17px 0;
+  text-align: start;
+}
+
+.help-options-subtitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 20px 0 10px 0;
+  text-align: start;
+  line-height: 1.5;
+}
+
+.help-options-button {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  text-align: center;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+.help-options-button-primary {
+  background-color: #181b4e;
+  color: white;
+}
+
+.help-options-button-secondary {
+  background-color: white;
+  color: #181b4e;
+  border: 1px solid #181b4e;
+  padding: 8px 16px !important;
+  width: auto !important;
+  font-size: 13px;
+}
+
+/* Help form curtain container */
+.help-form-curtain {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -77,7 +183,7 @@
   pointer-events: auto;
 }
 
-.help-curtain.help-curtain-open {
+.help-form-curtain.help-form-curtain-open {
   transform: translateY(0);
 }
 
@@ -96,42 +202,11 @@
   overflow-y: auto;
 }
 
-/* Help form header */
-.help-form-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #e9ecef;
-}
-
 .help-form-title {
   font-size: 20px;
-  font-weight: 600;
-  color: #333;
+  font-weight: bold;
+  color: #181b4e;
   margin: 0;
-}
-
-.help-form-close {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #aaa;
-  cursor: pointer;
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.2s ease;
-}
-
-.help-form-close:hover {
-  background-color: #f8f9fa;
-  color: #333;
 }
 
 /* Help form message area for validation feedback */
@@ -177,7 +252,7 @@
 .help-form-input:focus,
 .help-form-textarea:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #181b4e;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
 }
 
@@ -193,7 +268,7 @@
 }
 
 .help-form-button {
-  background-color: #007bff;
+  background-color: #181b4e;
   color: white;
   border: none;
   padding: 12px 20px;
@@ -204,9 +279,9 @@
   transition: background-color 0.2s ease;
 }
 
-.help-form-button:hover {
-  background-color: #0056b3;
-}
+/* .help-form-button:hover {
+  background-color: #13153e;
+} */
 
 .help-form-button:disabled {
   background-color: #6c757d;
