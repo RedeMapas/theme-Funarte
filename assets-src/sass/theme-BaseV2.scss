@@ -46,6 +46,7 @@ $home-opportunities: #f5bb50;
 $home-feature: #45B648;
 $home-register: #036293;
 
+$panel-font-title: #3E3E3E;
 
 
 // // Neutral colors
@@ -85,6 +86,7 @@ $border-radius-xxs: 2px;
 @import './components/home-map';
 @import './components/home-prosas-notices';
 @import './components/home-description';
+@import './components/panel-sidebar';
 @import './components/glpi-form';
 @import './layouts/home-register';
 @import './layouts/main-footer';
