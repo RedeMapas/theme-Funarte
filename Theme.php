@@ -90,5 +90,60 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
                 ];
             }
         });
+
+        /*
+         * correção para filtragem por estado/município na visualização de mapa
+         * substitui o método API_findByEvents para tratar corretamente os filtros En_Estado e En_Municipio
+         */
+        $app->hook('API(space.findByEvents)', function() use ($app) {
+            $space_controller = $app->controller('space');
+            $query_data = $space_controller->getData;
+
+            $date_from  = key_exists('@from',   $query_data) ? $query_data['@from'] : date("Y-m-d");
+            $date_to    = key_exists('@to',     $query_data) ? $query_data['@to']   : $date_from;
+
+            unset(
+                $query_data['@from'],
+                $query_data['@to']
+            );
+
+            $event_data = ['@select' => 'id'] + $query_data;
+            unset($event_data['location']);
+            unset($event_data['_geoLocation']);
+            unset($event_data['@count']);
+            // remove En_Estado e En_Municipio do event_data pois devem ser aplicados aos espaços, não aos eventos
+            unset($event_data['En_Estado']);
+            unset($event_data['En_Municipio']);
+            
+            $events_repo = $app->repo('Event');
+
+            $_event_ids = $events_repo->findByDateInterval($date_from, $date_to, null, null, true);
+            if (count($_event_ids) > 0) {
+                $event_data['id'] = 'IN(' . implode(',', $_event_ids) . ')';
+
+                $events = $app->controller('event')->apiQuery($event_data);
+                $event_ids = array_map(function ($e){ return $e['id']; }, $events);
+
+                $spaces = $space_controller->repository->findByEventsAndDateInterval($event_ids, $date_from, $date_to);
+                $space_ids = array_map(function($e){ return $e->id; }, $spaces);
+
+                if($space_ids){
+                    $space_data = ['id' => 'IN(' . implode(',', $space_ids) .')'];
+                    foreach($query_data as $key => $val)
+                        if($key[0] === '@' || $key == '_geoLocation' || $key == 'location' || $key == 'En_Estado' || $key == 'En_Municipio')
+                            $space_data[$key] = $val;
+
+                    unset($space_data['@keyword']);
+                    $response = $space_controller->apiQuery($space_data);
+                }else{
+                    $response = key_exists('@count', $query_data) ? 0 : [];
+                }
+            } else {
+                $response = key_exists('@count', $query_data) ? 0 : [];
+            }
+
+            $this->json($response);
+            return false; 
+        });
     }
 }
