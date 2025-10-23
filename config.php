@@ -1,4 +1,5 @@
 <?php
+
 use \MapasCulturais\i;
 
 return [
@@ -20,7 +21,7 @@ return [
 
     'text:home-header.title' => 'Boas-vindas à Plataforma Rede das Artes',
     'text:home-header.description' => 'Aqui você encontra e participa de uma rede artística de eventos, circuitos, grupos, coletivos e espaços, entre outros elos das artes visuais, do circo, da dança, da música, do teatro e das artes integradas, de todas as regiões do Brasil.<br><br>🚧 Versão Beta – Teste e Avalie 🚧<br><br>Esta é uma versão preliminar da plataforma, disponível para testes. Se encontrar qualquer divergência ou tiver dúvidas, entre em contato com o suporte. Seu feedback é essencial para melhorias!',
-    
+
     'mailer.templates' => [
         'welcome' => [
             'title' => i::__("Bem-vindo(a) ao Rede das Artes"),
@@ -120,8 +121,8 @@ return [
         'default_action_name' => 'index',
         'shortcuts' => [
             // busca
-            'agentes'           => ['funarte_search', 'agents'],
             'eventos'           => ['search', 'events'],
+            'agentes'           => ['funarte_search', 'agents'],
             'espacos'           => ['search', 'spaces'],
             'oportunidades'     => ['search', 'opportunities'],
             'iniciativas'          => ['search', 'projects'],
@@ -315,4 +316,5 @@ return [
             ]
         ]
     ],
+    'funarte.circuito_seals' => env('FUNARTE_CIRCUITO_SEALS', '106,107,108,109,110'),
 ];

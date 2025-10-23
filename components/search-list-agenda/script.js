@@ -1,6 +1,6 @@
 app.component('search-list-agenda', {
     template: $TEMPLATES['search-list-agenda'],
-    
+
     created() {
         this.currentDate = null;
         this.eventApi = new API('event');
@@ -12,16 +12,31 @@ app.component('search-list-agenda', {
         return {
             occurrences: [],
             loading: false,
-            page: 1
+            lastQueryHash: null,
+            cachedData: {}
         }
     },
 
     watch: {
         pseudoQuery: {
             handler(){
+                const queryHash = this.getQueryHash();
+
+                // Se a query não mudou, não refaz a busca
+                if (this.lastQueryHash === queryHash && this.occurrences.length > 0) {
+                    return;
+                }
+
+                // Verifica se já existe no cache
+                if (this.cachedData[queryHash]) {
+                    this.occurrences = this.cachedData[queryHash].occurrences;
+                    this.lastQueryHash = queryHash;
+                    return;
+                }
+
                 clearTimeout(this.watchTimeout);
                 this.loading = true;
-                this.page = 1;
+                this.lastQueryHash = queryHash;
 
                 this.watchTimeout = setTimeout(() => {
                     this.fetchOccurrences();
@@ -32,9 +47,17 @@ app.component('search-list-agenda', {
     },
 
     props: {
+        groupByEvent: {
+            type: Boolean,
+            default: false,
+        },
+        perEventLimit: {
+            type: Number,
+            default: 999999,
+        },
         limit: {
             type: Number,
-            default: 20,
+            default: 999999,
         },
         select: {
             type: String,
@@ -50,16 +73,33 @@ app.component('search-list-agenda', {
         }
     },
 
+    computed: {
+        groupedEvents() {
+            if (!this.groupByEvent) return [];
+            const byId = {};
+            for (const occ of this.occurrences) {
+                const ev = occ.event;
+                if (!ev || !ev.id) continue;
+                const key = ev.id;
+                if (!byId[key]) {
+                    byId[key] = { event: ev, occurrences: [] };
+                }
+                byId[key].occurrences.push(occ);
+            }
+            return Object.values(byId);
+        }
+    },
+
     methods: {
-        // http://localhost/api/event/findOccurrences?@from=2022-08-19&@to=2022-09-19&space:@select=id,name,shortDescription,endereco&@select=
+        getQueryHash() {
+            return JSON.stringify(this.pseudoQuery) + '_' + this.select + '_' + this.spaceSelect + '_' + this.limit + '_' + this.groupByEvent + '_' + this.perEventLimit;
+        },
+
         async fetchOccurrences() {
             const query = Utils.parsePseudoQuery(this.pseudoQuery);
 
             this.loading = true;
-            // clearTimeout(this.timeout);
-            // this.timeout = setTimeout(() => {
-                
-            // }, 500)
+
             if(query['@keyword']) {
                 query['event:@keyword'] = query['@keyword'];
                 delete query['@keyword'];
@@ -67,28 +107,25 @@ app.component('search-list-agenda', {
             query['event:@select'] = this.select;
             query['space:@select'] = this.spaceSelect;
             query['@limit'] = this.limit;
-            query['@page'] = this.page;
-            
+            query['@page'] = 1;
+
             const occurrences = await this.eventApi.fetch('occurrences', query, {
                 raw: true,
                 rawProcessor: (rawData) => Utils.occurrenceRawProcessor(rawData, this.eventApi, this.spaceApi)
             });
-            
-            const metadata = occurrences.metadata;
 
-            if(this.page === 1) {
-                this.occurrences = occurrences;
-            } else {
-                this.occurrences = this.occurrences.concat(occurrences);
-                this.occurrences.metadata = metadata;
-            }
+            this.occurrences = occurrences;
+
+            // Cache dos dados
+            const queryHash = this.getQueryHash();
+            this.cachedData[queryHash] = {
+                occurrences: [...this.occurrences]
+            };
+
             this.loading = false;
         },
 
-        loadMore() {
-            this.page++;
-            this.fetchOccurrences();
-        },
+
 
         newDate(occurrence) {
             if (this.currentDate?.date('long') != occurrence.starts.date('long')) {

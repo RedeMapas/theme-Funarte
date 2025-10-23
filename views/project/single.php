@@ -28,6 +28,7 @@ $this->import('
     mc-tab
     mc-tabs
     search-list-agenda
+    agenda-section
 ');
 
 $label = $this->isRequestedEntityMine() ? i::__('Meus projetos') : i::__('Projetos');
@@ -137,34 +138,28 @@ if($children_id ){
                         </mc-entities>
 
                         <div v-if="!entity.children" class="single-project__not-found">
-                            <p class="semibold"><?= i::__('Nenhum subprojeto vinculado.') ?></p>
+                            <p class="semibold"><?= i::__('Nenhuma subsubiniciativa vinculada.') ?></p>
                         </div>
                     </main>
                     <aside>
                         <div class="grid-12">
+                            <entity-owner classes="col-12" title="<?php i::esc_attr_e('Publicado por'); ?>" :entity="entity"></entity-owner>
                             <entity-social-media :entity="entity" classes="col-12"></entity-social-media>
-                            <entity-seals :entity="entity" :editable="entity.currentUserPermissions?.createSealRelation" classes="col-12" title="<?php i::esc_attr_e('Verificações'); ?>"></entity-seals>
+                            <entity-seals :entity="entity" :editable="entity.currentUserPermissions?.createSealRelation" classes="col-12" title="<?php i::esc_attr_e('Selos'); ?>"></entity-seals>
                             <entity-related-agents :entity="entity" classes="col-12" title="<?php i::esc_attr_e('Agentes Relacionados'); ?>"></entity-related-agents>
                             <entity-terms :entity="entity" hide-required classes="col-12" taxonomy="tag" title="<?php i::esc_attr_e('Tags') ?>"></entity-terms>
                             <mc-share-links classes="col-12" title="<?php i::esc_attr_e('Compartilhar'); ?>" text="<?php i::esc_attr_e('Veja este link:'); ?>"></mc-share-links>
-                            <entity-owner classes="col-12" title="<?php i::esc_attr_e('Publicado por'); ?>" :entity="entity"></entity-owner>
                             <entity-admins :entity="entity" classes="col-12"></entity-admins>
                         </div>
                     </aside>
                 </mc-container>
             </div>
         </mc-tab>
-        <mc-tab icon="event" label="<?= i::_e('Agenda') ?>" slug="agenda">
+        <mc-tab icon="event" label="<?= i::_e('Programação') ?>" slug="programacao">
             <div class="search__tabs--list">
-                <search-list-agenda 
-                    :pseudo-query='<?= json_encode([
-                        "event:project" => $entity->id,
-                        "@from" => date("Y-m-d"),
-                        "@to" => date("Y") . "-12-31"
-                    ]) ?>'
-                    select="id,name,subTitle,files.avatar,seals,terms,classificacaoEtaria,singleUrl,project"
-                    space-select="id,name,endereco,files.avatar,singleUrl"
-                />
+                <div class="entity-card__agenda" ref="agendaContainer">
+                    <agenda-section :entity="entity"></agenda-section>
+                </div>
             </div>
         </mc-tab>
     </mc-tabs>

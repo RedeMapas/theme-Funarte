@@ -31,7 +31,7 @@ $opportunities-500: #c40c0c;
 $events-500: #117C83;
 $spaces-500: #F0B500;
 $agents-500: #E0720B;
-$projects-500: #D47991;
+$projects-500: #F24797;
 
 $seals-500: #1E1E1E;
 
@@ -61,20 +61,6 @@ $font-title: 'League Gothic', sans-serif !default;
 
 // // Borders radius
 $border-radius-xxs: 2px;
-// $border-radius-xs: 4px;
-// $border-radius-sm: 8px;
-// $border-radius-pill: 64px;
-
-// // Borders
-// $border-hairline: 1px solid;
-// $border-solid: 2px solid;
-
-// // Shadows
-// $shadow-lv-1: 0px 4px 8px rgba(0, 0, 0, 0.16);
-// $shadow-lv-2: 0px 8px 16px rgba(0, 0, 0, 0.16);
-// $shadow-lv-3: 0px 8px 24px rgba(0, 0, 0, 0.16);
-// $shadow-lv-4: 0px 16px 48px rgba(0, 0, 0, 0.16);
-// $shadow-lv-1-up: 0px -4px 8px rgba(0, 0, 0, 0.16);
 
 @import '../../../BaseV2/assets-src/sass/theme-BaseV2';
 
@@ -96,7 +82,6 @@ $border-radius-xxs: 2px;
     max-width: 9rem;
 }
 
-
 :root{
     --mc-font-title: #{$font-title};
 }
@@ -104,39 +89,6 @@ $border-radius-xxs: 2px;
 .controller-search.action-events form .verified,
 .controller-search.action-agents .form > div:nth-child(1) {
     display: none;
-}
-
-// melhorias na pagina de eventos na secao de ocorrencias
-.entity-occurrence-list__occurrences .occurrence__card .content__ticket .ticket {
-    font-weight: 900;
-    font-size: 16px;
-}
-
-.entity-occurrence-list__occurrences .occurrence__card .header__title .space__color {
-    color: $primary-500
-}
-
-.entity-occurrence-list__occurrences .occurrence__card .header {
-    width: 100%;
-}
-.entity-occurrence-list__occurrences .occurrence__card .header__title {
-    width: 100%;
-    font-weight: 999;
-}
-
-.entity-occurrence-list__occurrences .occurrence__card .header__link {
-    display: inline-block;
-    width: 20%;
-    margin-top: -35px;
-}
-
-.entity-occurrence-list__occurrences .occurrence__card .address {
-    margin-top: -10px;
-    margin-bottom: 10px;
-}
-.entity-occurrence-list__occurrences .occurrence__card .content__price--value .value{
-    font-weight: 999;
-    font-size: 16px;
 }
 
 // Estilos para as entidades que possuem o selo
@@ -195,7 +147,7 @@ $border-radius-xxs: 2px;
         border: 1px solid #e9ecef !important;
         border-radius: 8px !important;
         margin-bottom: size(16);
-        
+
         &:hover {
             background: #ffffff !important;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
@@ -205,7 +157,7 @@ $border-radius-xxs: 2px;
 
 .seal-entities-tabs {
     margin-top: size(24);
-    
+
     h3 {
         margin: size(24) 0 size(20) 0;
         padding-top: size(8);
@@ -218,3 +170,481 @@ $border-radius-xxs: 2px;
         padding-top: 0;
     }
 }
+
+/* Período do Circuito */
+.circuit-dates {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.circuit-dates__title {
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.circuit-dates span {
+    padding: 4px 8px;
+}
+
+/* Lista de Selos */
+.seals {
+    margin-bottom: 15px;
+}
+
+.seals__title {
+    font-weight: bold;
+    color: #333;
+    margin: 0 8px 8px 0;
+    display: inline-block;
+}
+.entity-seals__title {
+    margin:0;
+}
+
+.seals__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.seals__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+}
+
+.seals__image,
+.seals__icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 2px;
+    object-fit: cover;
+}
+
+.seals__name {
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+// Estilos para entity-card-circuitos - estrutura padronizada
+.entity-card {
+
+    .user-info .mc-title {
+        font-size: 24px;
+    }
+
+
+    .entity-card__content {
+        display: inline-block;
+    }
+
+    // Estrutura geral dos campos
+    .field-card {
+
+
+        // Campo inline (ID + TIPO na mesma linha)
+        &.field--inline {
+            display: inline-block !important;
+            margin-right: 12px;
+        }
+
+        margin-bottom: 12px;
+
+        // Labels padrão (ID, TIPO, PERÍODO, SELOS, TAGS)
+        .field__label {
+            font-size: 14px !important;
+            font-weight: normal !important;
+            text-transform: capitalize !important;
+            color: #333;
+            display: inline;
+            margin-right: 3px;
+
+            // Ícones nos labels
+            .iconify {
+                width: 24px !important;
+                height: 24px !important;
+                font-size: 24px !important;
+                margin-left: 4px;
+                display: inline;
+                vertical-align: middle;
+            }
+        }
+
+        // Conteúdo padrão dos campos
+        .field__content {
+            font-size: 14px !important;
+            font-weight: bold !important;
+            color: #333;
+            display: inline;
+
+            &.project__color {
+                color: var(--mc-primary-500);
+            }
+
+            .entity-seals {
+                display: inline-block;
+                
+                .entity-seals__seals--seal {
+                    display: inline-block;
+                }
+                .seal-icon,
+                .seal-label {
+                    display: inline-block;
+                    line-height: 24px;
+                    vertical-align: middle;
+                    font-weight: normal;
+                }
+
+                .seal-icon {
+                    width: 24px;
+                    height: 24px;
+                }
+
+                .seal-icon .mc-avatar--small {
+                    width: 24px;
+                    height: 24px;
+                    min-width: 24px;
+                    min-height: 24px;
+                }
+
+                .seal-label {
+                    margin: 0 0 0 5px;
+                }
+            }
+        }
+
+
+        // Campo período - conteúdo especial
+        &.field--period {
+            .field__content {
+                font-size: 16px !important;
+                line-height: 1.4;
+                vertical-align: middle;
+                font-weight: bold !important;
+                color: #333 !important;
+            }
+        }
+
+    }
+    .entity-card__footer {
+        margin-top: 20px;
+    }
+}
+
+
+// Agenda dos Circuitos - Layout horizontal com scroll
+
+.entity-card__agenda {
+    .agenda-section {
+        .agenda-header {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dee2e6;
+
+            .agenda-title {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin: 0;
+                font-size: 18px;
+                font-weight: 600;
+                color: #2c3e50;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+
+                .mc-icon {
+                    font-size: 20px;
+                    color: #2d5f88;
+                }
+            }
+        }
+
+        .agenda-content {
+            .agenda-loading {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                padding: 40px;
+                color: #6c757d;
+            }
+
+            .no-events-message {
+                text-align: center;
+                color: #6c757d;
+
+                .mc-icon {
+                    font-size: 24px;
+                    margin-bottom: 10px;
+                    opacity: 0.5;
+                }
+
+                p {
+                    margin: 0;
+                    font-size: 16px;
+                }
+            }
+
+            .agenda-events {
+                .event-row {
+                    display: inline;
+                    margin-bottom: 25px;
+                    padding: 0;
+                    background: transparent;
+                    border: none;
+                    border-radius: 0;
+
+                    .event-name {
+                        padding: 15px 20px 15px 0;
+                        margin-right: 20px;
+
+                        h4 {
+                            margin: 0;
+                            font-size: 16px;
+                            font-weight: 700;
+                            text-transform: uppercase;
+
+                            a {
+                                color: inherit;
+                                text-decoration: underline;
+
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+
+                    .event-occurrences-wrapper {
+                        flex: 1;
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+
+
+
+                        .occurrences-container {
+                            flex: 1;
+                            overflow-x: auto;
+                            overflow-y: hidden;
+                            padding: 8px 0;
+                            display: flex;
+                            gap: 15px;
+                            scroll-behavior: smooth;
+
+                            &::-webkit-scrollbar {
+                                height: 8px;
+                            }
+
+                            &::-webkit-scrollbar-track {
+                                background: #f1f3f4;
+                                border-radius: 4px;
+                            }
+
+                            &::-webkit-scrollbar-thumb {
+                                background: #c1c8cd;
+                                border-radius: 4px;
+
+                                &:hover {
+                                    background: #a6adb4;
+                                }
+                            }
+
+                            .occurrence-item {
+                                min-width: 300px;
+                                max-width: 300px;
+                                padding: 8px;
+                                background: white;
+                                border: 1px solid #dee2e6;
+                                border-radius: 8px;
+                                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+                                flex-shrink: 0;
+                                transition: all 0.2s ease;
+
+                                &:hover {
+                                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+                                    transform: translateY(-2px);
+                                }
+
+                                .occurrence-date {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 10px;
+                                    margin-bottom: 12px;
+                                    padding-bottom: 8px;
+                                    border-bottom: 1px solid #f8f9fa;
+                                    color: #000;
+
+                                    .iconify {
+                                        font-size: 24px;
+                                    }
+
+                                    span {
+                                        font-size: 16px;
+                                        font-weight: bold;
+                                        line-height: 1.3;
+                                    }
+                                }
+
+                                .occurrence-location {
+                                    display: flex;
+                                    align-items: flex-start;
+                                    gap: 10px;
+
+                                    .iconify {
+                                        font-size: 24px;
+                                        margin-top: 2px;
+                                    }
+
+                                    .location-details {
+                                        flex: 1;
+
+                                        .space-name {
+                                            margin-bottom: 6px;
+                                            font-size: 14px;
+                                            line-height: 1.4;
+                                            color: #000;
+
+                                            strong {
+                                                display: block;
+                                                margin-bottom: 3px;
+                                            }
+
+                                        }
+
+                                        .space-address {
+                                            font-size: 13px;
+                                            color: #6c757d;
+                                            line-height: 1.4;
+                                            font-style: italic;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsivo para tablets
+@media (max-width: 768px) {
+    .entity-card__agenda {
+        .agenda-section {
+            .agenda-content {
+                .agenda-events {
+                    .event-row {
+                        flex-direction: column;
+                        align-items: stretch;
+
+                        .event-name {
+                            min-width: unset;
+                            max-width: unset;
+                            border-right: none;
+                            border-bottom: 1px solid #dee2e6;
+                            margin-right: 0;
+                            margin-bottom: 15px;
+                            padding-bottom: 12px;
+
+                            h4 {
+                                font-size: 15px;
+                            }
+                        }
+
+                        .event-occurrences-wrapper {
+
+
+                            .occurrences-container {
+                                .occurrence-item {
+                                    min-width: 280px;
+                                    max-width: 280px;
+                                    padding: 15px;
+
+                                    .occurrence-date {
+                                        span {
+                                            font-size: 14px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Responsivo para mobile
+@media (max-width: 480px) {
+    .entity-card__agenda {
+        padding: 15px;
+
+        .agenda-section {
+            .agenda-header {
+                .agenda-title {
+                    font-size: 16px;
+                }
+            }
+
+            .agenda-content {
+                .agenda-events {
+                    .event-row {
+                        .event-occurrences-wrapper {
+
+
+                            .occurrences-container {
+                                .occurrence-item {
+                                    min-width: 250px;
+                                    max-width: 250px;
+                                    padding: 12px;
+
+                                    .occurrence-date {
+                                        span {
+                                            font-size: 13px;
+                                        }
+                                    }
+
+                                    .occurrence-location {
+                                        .location-details {
+                                            .space-name {
+                                                font-size: 13px;
+
+                                                strong {
+                                                    font-size: 12px;
+                                                }
+                                            }
+
+                                            .space-address {
+                                                font-size: 12px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.controller-circuitos .mc-header-menu--item.project .label {
+  color: var(--mc-projects-500);
+}
+
+.entity-card__footer--action .button {
+    max-width: 272px;
+}
+
+

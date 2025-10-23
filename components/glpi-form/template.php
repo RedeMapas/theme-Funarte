@@ -41,7 +41,7 @@ $this->import('mc-captcha');
       
       <p class="help-options-subtitle">Quer entender melhor como utilizar os recursos e as configurações dessa página?</p>
       
-      <a href="https://redemapas.github.io/manual/" target="_blank" class="help-options-button help-options-button-primary">
+      <a href="https://manual.rededasartes.funarte.gov.br/" target="_blank" class="help-options-button help-options-button-primary">
         Acesse o Manual
       </a>
       

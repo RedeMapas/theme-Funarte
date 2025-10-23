@@ -68,17 +68,16 @@ $this->import('
                     </a>
                     <?php $this->applyTemplateHook('mc-header-menu-spaces', 'end') ?>
                 </li>
-                <?php $this->applyTemplateHook('mc-header-menu-spaces', 'after') ?>
-                <!-- TODO: DESIGN PENDENTE -> Redirecionar para a nova tela de circuitos -->
-                <?php $this->applyTemplateHook('mc-header-menu-spaces', 'before') ?>
-                <!-- <li v-if="global.enabledEntities.spaces">
-                    <?php $this->applyTemplateHook('mc-header-menu-spaces', 'begin') ?>
-                    <a href="<?= $app->createUrl('search', 'spaces') ?>" class="mc-header-menu--item spaces">
+                <?php $this->applyTemplateHook('mc-header-menu-projects', 'after') ?>
+                <?php $this->applyTemplateHook('mc-header-menu-projects', 'before') ?>
+                <li v-if="global.enabledEntities.projects">
+                    <?php $this->applyTemplateHook('mc-header-menu-projects', 'begin') ?>
+                    <a href="<?= $app->createUrl('circuitos') ?>" class="mc-header-menu--item project">
                         <p class="label"> <?php i::_e('Circuitos') ?> </p>
                     </a>
-                    <?php $this->applyTemplateHook('mc-header-menu-spaces', 'end') ?>
-                </li> -->
-                <?php $this->applyTemplateHook('mc-header-menu-spaces', 'after') ?>
+                    <?php $this->applyTemplateHook('mc-header-menu-projects', 'end') ?>
+                </li>
+                <?php $this->applyTemplateHook('mc-header-menu-projects', 'after') ?>
                 
                 <?php $this->applyTemplateHook('mc-header-menu', 'end') ?>
             </template>

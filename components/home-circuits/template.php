@@ -31,6 +31,6 @@ $circuits_brasil_url = $app->view->asset('img/home/home-circuits/artBrasil.png',
         </div>
     </div>
     <button>
-        <a href="<?= $app->createUrl("search","events")?>"><?= $this->text('title', i::__('Ver Circuitos Artísticos')) ?></a>
+        <a href="<?= $app->createUrl("circuitos")?>"><?= $this->text('title', i::__('Ver Circuitos Artísticos')) ?></a>
     </button>
 </section>

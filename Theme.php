@@ -13,19 +13,14 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         return __DIR__;
     }
 
-    public function register()
-    {
-        parent::register();
-        $app = \MapasCulturais\App::i();
-        $app->registerController('funarte_search', 'Funarte\SearchController');
-    }
-
     function __construct($config = [])
     {
         $app = App::i();
         $app->config['Metabase']['enabled'] = env('METABASE_FUNARTE_ENABLED', true);
 
         parent::__construct($config);
+        $app->registerController('funarte_search', 'Funarte\SearchController');
+        $app->registerController('circuitos', 'Funarte\CircuitosController');
     }
 
     function _init()
@@ -145,5 +140,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
             $this->json($response);
             return false; 
         });
+
+        $app->hook("component(mc-icon).iconset", function(&$icon){
+            $icon['project'] = "ph:pinwheel-fill";
+            $icon['calendar'] = "bx:calendar";
+            $icon['map-marker'] = "mdi:map-marker";
+            
+        });
+
     }
 }
