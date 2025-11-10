@@ -69,7 +69,7 @@ app.component('create-project' , {
         },
         createEntity() {
             this.entity = Vue.ref(new Entity('project'));
-            this.entity.type = 1;
+            this.entity.type = null;
             this.entity.terms = {area: []}
 
         },
