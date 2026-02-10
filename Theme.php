@@ -4,6 +4,8 @@ namespace Funarte;
 
 use MapasCulturais\App;
 use MapasCulturais\API;
+use MapasCulturais\Definitions;
+use MapasCulturais\Entities\Agent;
 
 // class Theme extends \Subsite\Theme {
 class Theme extends \MapasCulturais\Themes\BaseV2\Theme
@@ -23,29 +25,51 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         $app->registerController('circuitos', 'Funarte\CircuitosController');
     }
 
+    function register()
+    {
+        $app = App::i();
+        parent::register();
+
+        $def = new Definitions\Metadata('isFunarte', ['label' => 'É Funarte', 'type' => 'boolean']);
+        $app->registerMetadata($def, 'MapasCulturais\Entities\Agent');
+    }
+
     function _init()
     {
         parent::_init();
         $app = App::i();
 
-        $app->hook('template(<<*>>.head):end', function () {
+        // Definir isFunarte para todos os agentes do usuário ao fazer login
+        $app->hook('auth.login', function ($user) use ($app) {
+            if (!$user || $user->is('guest')) {
+                return;
+            }
+
+            $agents = $app->repo('Agent')->findBy(['user' => $user->id]);
+            foreach ($agents as $agent) {
+                if ($agent->isFunarte) {
+                    continue;
+                }
+                $app->disableAccessControl();
+                $agent->isFunarte = true;
+                $agent->save(true);
+                $app->enableAccessControl();
+            }
+        });
+
+        $app->hook('template(<<*>>).head):end', function () {
             $this->part('google-analytics--script');
             $this->part('clarity--script');
+        });
+
+        $app->hook('template(<<*>>).<<*>>.body):begin', function(){
+            /** @var \MapasCulturais\Theme $this */
+            $this->part('gpi-form');
         });
 
         $app->hook('template(<<*>>.<<*>>.body):begin', function(){
             /** @var \MapasCulturais\Theme $this */
             $this->part('glpi-form');
-        });
-
-        $app->hook('POST(auth.login)', function () use ($app) {
-            if ($app->user && $app->user->isAuthenticated()) {
-                $agent = $app->user->getAgent();
-                if ($agent && $agent->getMetadata('isFunarte') !== true) {
-                    $agent->setMetadata('isFunarte', true);
-                    $agent->save();
-                }
-            }
         });
 
         /**
