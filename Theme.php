@@ -6,6 +6,7 @@ use MapasCulturais\App;
 use MapasCulturais\API;
 use MapasCulturais\Definitions;
 use MapasCulturais\Entities\Agent;
+use MapasCulturais\i;
 
 // class Theme extends \Subsite\Theme {
 class Theme extends \MapasCulturais\Themes\BaseV2\Theme
@@ -23,6 +24,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
         parent::__construct($config);
         $app->registerController('funarte_search', 'Funarte\SearchController');
         $app->registerController('circuitos', 'Funarte\CircuitosController');
+        $app->registerController('dashboards', 'Funarte\DashboardsController');
     }
 
     function register()
@@ -103,6 +105,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
                     ...$i
                 ];
             }
+
+            DashboardsAccess::appendPanelNavItem($nav_items, $app->user, i::__('Painéis de Dados'));
         });
 
         /*
@@ -164,7 +168,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme
             $icon['project'] = "ph:pinwheel-fill";
             $icon['calendar'] = "bx:calendar";
             $icon['map-marker'] = "mdi:map-marker";
-            
+
         });
 
     }
