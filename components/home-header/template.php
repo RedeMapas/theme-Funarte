@@ -61,8 +61,8 @@ $logos_url = $app->view->asset('img/home/home-main-header/logos.png', false);
         </div>
     </div>
   
-    <div class="hero-banner__image">
+    <!--div class="hero-banner__image">
       <img src="<?= $banner_url ?>" alt="Formas gráficas coloridas" />
-    </div>
+    </div-->
   </div>
 </section>
