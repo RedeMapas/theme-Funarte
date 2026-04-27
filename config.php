@@ -18,6 +18,15 @@ return [
     ex: `img/meu-home-header-background.jpg` (pasta assets/img/meu-home-header-background.jpg do tema)
     */
     //'homeHeader.background' => 'img/banner.png',
+    'homeHeader.banner' => 'https://rededasartes.cultura.gov.br/files/opportunity/7164/mapadasartes-plataforma-capa-05-1.png',
+    'homeHeader.bannerLink' => 'https://rededasartes.cultura.gov.br/oportunidade/7164/',
+    'homeHeader.downloadableLink' => false,
+    /* 'homeHeader.secondBanner' => 'https://placehold.co/640x240/png?text=Banner+2+Funarte', */
+    /* 'homeHeader.secondBannerLink' => 'https://example.com/banner-2', */
+    /* 'homeHeader.secondDownloadableLink' => false, */
+    /* 'homeHeader.thirdBanner' => 'https://placehold.co/640x240/png?text=Banner+3+Funarte', */
+    /* 'homeHeader.thirdBannerLink' => 'https://example.com/banner-3', */
+    /* 'homeHeader.thirdDownloadableLink' => false, */
 
     'text:home-header.title' => 'Boas-vindas à Plataforma Rede das Artes',
     'text:home-header.description' => 'Aqui você encontra e participa de uma rede artística de eventos, circuitos, grupos, coletivos e espaços, entre outros elos das artes visuais, do circo, da dança, da música, do teatro e das artes integradas, de todas as regiões do Brasil.<br><br>🚧 Versão Beta – Teste e Avalie 🚧<br><br>Esta é uma versão preliminar da plataforma, disponível para testes. Se encontrar qualquer divergência ou tiver dúvidas, entre em contato com o suporte. Seu feedback é essencial para melhorias!',
